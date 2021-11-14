@@ -1,0 +1,39 @@
+.main-screen__view {
+  height: 100vh;
+  background-image: url('./assets/images/main-screen-bg.jpg');
+  background-size: cover;
+  background-position: center center;
+
+  .container {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .main {
+    flex-grow: 1;
+  }
+
+  .settings-btn-wrap {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .logo-wrap {
+    margin-top: 277px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .category-btns-container {
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 20px;
+  }
+
+  .footer {
+  }
+}

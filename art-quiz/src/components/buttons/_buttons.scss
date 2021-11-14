@@ -1,0 +1,20 @@
+.btn {
+  min-width: 156px;
+  padding: 14px 8px 16px;
+  @include font(24px, 24px, 500, -0.4px);
+  text-transform: capitalize;
+  color: $color-font-base;
+  border: 1px solid $color-font-base;
+  border-radius: 56px;
+}
+
+.settings-btn {
+  width: 34px;
+  height: 34px;
+  background-image: url('./assets/svg/settings-btn.svg');
+  background-size: 100% 100%;
+}
+
+.category-btn {
+  width: 268px;
+}

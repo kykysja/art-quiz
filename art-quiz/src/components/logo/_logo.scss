@@ -1,0 +1,10 @@
+.logo {
+  height: 62px;
+  padding-left: 13px;
+  background-image: url('./assets/svg/logo.svg');
+  background-repeat: no-repeat;
+}
+
+.logo__text {
+  @include font(42px, 60px, 700, -0.91px);
+}

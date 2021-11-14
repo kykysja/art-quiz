@@ -1,0 +1,19 @@
+html {
+  font-size: 14px;
+}
+
+body {
+  @extend %font-main;
+  color: $color-font-base;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.view {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 22px;
+  padding-bottom: 10px;
+}
