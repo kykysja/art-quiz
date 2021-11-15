@@ -1,6 +1,10 @@
 import App from './components/app';
 
 const app = new App();
-app.mainScreen.render();
+app.renderCurrentView();
+
+window.addEventListener('popstate', () => {
+  app.renderCurrentView();
+});
 
 export default app;
