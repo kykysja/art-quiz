@@ -5,6 +5,7 @@ class SettingsBtn extends BaseComponent {
     super('button', ['settings-btn']);
 
     this.element.setAttribute('type', 'button');
+    this.element.innerHTML = '<a href="#settings"></a>';
   }
 }
 

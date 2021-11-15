@@ -5,7 +5,8 @@ class CategoryBtn extends BaseComponent {
     super('button', ['btn', 'category-btn']);
 
     this.element.setAttribute('type', 'button');
-    this.element.innerHTML = `${categoryName} Quiz`;
+
+    this.element.innerHTML = `<a href="#${categoryName}">${categoryName} Quiz</a>`;
   }
 }
 

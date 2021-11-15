@@ -9,10 +9,13 @@
 }
 
 .settings-btn {
-  width: 34px;
-  height: 34px;
-  background-image: url('./assets/svg/settings-btn.svg');
-  background-size: 100% 100%;
+  a {
+    display: block;
+    width: 34px;
+    height: 34px;
+    background-image: url('./assets/svg/settings-btn.svg');
+    background-size: 100% 100%;
+  }
 }
 
 .category-btn {

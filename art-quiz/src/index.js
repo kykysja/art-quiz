@@ -1,10 +1,4 @@
-import App from './components/app';
+import renderCurrentView from './router/router';
 
-const app = new App();
-app.renderCurrentView();
-
-window.addEventListener('popstate', () => {
-  app.renderCurrentView();
-});
-
-export default app;
+window.addEventListener('hashchange', renderCurrentView);
+window.addEventListener('load', renderCurrentView);
