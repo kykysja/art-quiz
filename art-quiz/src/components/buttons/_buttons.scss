@@ -3,9 +3,20 @@
   padding: 14px 8px 16px;
   @include font(24px, 24px, 500, -0.4px);
   text-transform: capitalize;
+  text-align: center;
   color: $color-font-base;
   border: 1px solid $color-font-base;
   border-radius: 56px;
+}
+
+.img-btn {
+  border-radius: 18px;
+  border: 1.8px solid $color-prim-add;
+
+  .img {
+    width: 100%;
+    border-radius: 18px;
+  }
 }
 
 .settings-btn {
@@ -20,4 +31,18 @@
 
 .category-btn {
   width: 268px;
+  padding: 0;
+
+  a {
+    display: block;
+    width: 100%;
+    padding: 14px 8px 16px;
+  }
+}
+
+.score-btn {
+  width: 28px;
+  height: 28px;
+  background-image: url('./assets/svg/score-btn.svg');
+  background-size: 100% 100%;
 }

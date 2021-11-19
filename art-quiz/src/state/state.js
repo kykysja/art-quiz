@@ -1,11 +1,11 @@
 import getData from '../api/data';
-import { getFromLocalStorage } from '../helpers/local-storage';
+import { getFromLocalStorage } from '../local-storage/local-storage';
 
 const State = {
   artists: getFromLocalStorage('art-quiz-app-artists-quizzes') || [],
   pictures: getFromLocalStorage('art-quiz-app-pictures-quizzes') || [],
   authors: getFromLocalStorage('art-quiz-app-authors') || [],
-  imagesNums: getFromLocalStorage('art-quiz-app-imagesNums') || [],
+  fullData: getFromLocalStorage('art-quiz-app-full-data') || [],
 
   async setCategoryQuizzes(categoryName) {
     const data = await getData(`${categoryName}`);
@@ -35,11 +35,11 @@ const State = {
     }
   },
 
-  async setImagesNums() {
+  async setFullData() {
     const data = await getData('data');
 
     for (let i = 0; i < data.length; i += 1) {
-      this.imagesNums.push(data[i].imageNum);
+      this.fullData.push(data[i]);
     }
   },
 
@@ -47,7 +47,7 @@ const State = {
     if (!this.artists.length) await this.setCategoryQuizzes('artists');
     if (!this.pictures.length) await this.setCategoryQuizzes('pictures');
     if (!this.authors.length) await this.setAuthors();
-    if (!this.imagesNums.length) await this.setImagesNums();
+    if (!this.fullData.length) await this.setFullData();
   },
 };
 

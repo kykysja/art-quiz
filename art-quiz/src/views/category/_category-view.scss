@@ -1,0 +1,32 @@
+.category__view {
+  .container {
+  }
+
+  .header {
+  }
+
+  .logo {
+    .logo__text:first-child {
+      color: $color-prim;
+    }
+  }
+
+  .settings-btn-wrap {
+  }
+
+  .main {
+  }
+
+  .title {
+    margin-top: 27px;
+  }
+
+  .cards-container {
+    margin-top: 50px;
+    row-gap: 15px;
+  }
+
+  .footer {
+    margin-top: 50px;
+  }
+}

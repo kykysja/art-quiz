@@ -1,39 +1,49 @@
+import State from '../state/state';
 import CategoryView from '../views/category/category-view';
 import MainScreen from '../views/main-screen/main-screen';
 import QuizView from '../views/quiz/quiz-view';
 import SettingsView from '../views/settings/settings-view';
 
-function renderCurrentView() {
-  const url = window.location.hash.slice(1) || '/';
+const Router = {
+  views: {
+    MainScreen,
+    CategoryView,
+    QuizView,
+    SettingsView,
+  },
 
-  switch (true) {
-    case /artists\/quiz/.test(url):
-      new QuizView('artists', url[url.length - 1]).render();
-      break;
+  renderCurrentView() {
+    const url = window.location.hash.slice(1) || '/';
 
-    case /pictures\/quiz/.test(url):
-      new QuizView('pictures', url[url.length - 1]).render();
-      break;
+    switch (true) {
+      case /artists\/quiz/.test(url):
+        new this.views.QuizView('artists', State.artists[url.split('/')[2] - 1]).render();
+        break;
 
-    case /artists/.test(url):
-      new CategoryView('artists', 0).render();
-      break;
+      case /pictures\/quiz/.test(url):
+        new this.views.QuizView('pictures', State.pictures[url.split('/')[2] - 1]).render();
+        break;
 
-    case /pictures/.test(url):
-      new CategoryView('pictures', 120).render();
-      break;
+      case /artists/.test(url):
+        new this.views.CategoryView('artists').render();
+        break;
 
-    case /settings/.test(url):
-      new SettingsView().render();
-      break;
+      case /pictures/.test(url):
+        new this.views.CategoryView('pictures').render();
+        break;
 
-    case /\//.test(url):
-      new MainScreen().render();
-      break;
+      case /settings/.test(url):
+        new this.views.SettingsView().render();
+        break;
 
-    default:
-    //! to create 404 page!
-  }
-}
+      case /\//.test(url):
+        new this.views.MainScreen().render();
+        break;
 
-export default renderCurrentView;
+      default:
+      //! to create 404 page!
+    }
+  },
+};
+
+export default Router;
