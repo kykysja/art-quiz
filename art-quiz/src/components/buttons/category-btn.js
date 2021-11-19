@@ -6,7 +6,9 @@ class CategoryBtn extends BaseComponent {
 
     this.element.setAttribute('type', 'button');
 
-    this.element.innerHTML = `<a href="#${categoryName}">${categoryName} Quiz</a>`;
+    this.element.innerHTML = `<a href="#${categoryName}">${
+      categoryName === 'artists' ? 'художники' : 'картины'
+    }</a>`;
   }
 }
 

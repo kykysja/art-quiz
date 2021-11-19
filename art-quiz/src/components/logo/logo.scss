@@ -8,3 +8,10 @@
 .logo__text {
   @include font(42px, 60px, 700, -0.91px);
 }
+
+.rss-logo {
+  width: 61px;
+  height: 23px;
+  background-image: url('./assets/svg/footer-logo.svg');
+  background-size: 100% 100%;
+}
