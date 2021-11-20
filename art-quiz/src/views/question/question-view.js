@@ -1,18 +1,21 @@
 import BaseComponent from '../../components/base-component';
+import QuestionAnswerPopUp from '../../components/pop-up/question-answer-pop-up/question-answer-pop-up';
 import QiuzAnswerBtn from '../../components/quiz-answer-btn/quiz-answer-btn';
 import Timer from '../../components/timer/timer';
-import { getRandomNum, shuffle } from '../../helpers/helpers';
 import State from '../../state/state';
+import { getRandomNum, shuffle } from '../../helpers/helpers';
 
 class QuestionView extends BaseComponent {
-  constructor(categoryName, question) {
+  constructor(categoryName, quizNum, question, questionIndex) {
     super('div', ['question-view', `${categoryName}__question-view`]);
 
     this.categoryName = categoryName;
+    this.quizNum = quizNum;
     this.question = question;
-    this.answers = this.categoryName === 'artists' ? this.getAuthors() : this.getImagesNums();
+    this.questionIndex = questionIndex;
 
     this.timer = new Timer();
+    this.answers = this.categoryName === 'artists' ? this.getAuthors() : this.getImagesNums();
 
     this.element.innerHTML =
       this.categoryName === 'artists'
@@ -64,43 +67,53 @@ class QuestionView extends BaseComponent {
     return shuffle(Array.from(imagesNumsSet));
   }
 
+  handleCorrectAnswer(answerElement) {
+    answerElement.classList.add('correct');
+
+    setTimeout(() => {
+      new QuestionAnswerPopUp(this.categoryName, this.quizNum, this.question, 'correct').render();
+    }, 800);
+  }
+
+  handleWrongAnswer(answerElement) {
+    answerElement.classList.add('wrong');
+
+    setTimeout(() => {
+      new QuestionAnswerPopUp(this.categoryName, this.quizNum, this.question, 'wrong').render();
+    }, 800);
+  }
+
+  handleAnswerBtnClick(answer) {
+    switch (this.categoryName) {
+      case 'artists':
+        if (answer.element.textContent === this.question.author) {
+          State.artists[this.quizNum - 1].questions[this.questionIndex].isCorrectAnswered = true;
+
+          this.handleCorrectAnswer(answer.element);
+        } else this.handleWrongAnswer(answer.element);
+        break;
+
+      case 'pictures':
+        if (answer.answerData === this.question.imageNum) {
+          State.pictures[this.quizNum - 1].questions[this.questionIndex].isCorrectAnswered = true;
+
+          this.handleCorrectAnswer(answer.element);
+        } else this.handleWrongAnswer(answer.element);
+        break;
+
+      default:
+    }
+  }
+
   generateAnswers() {
     for (let i = 0; i < this.answers.length; i += 1) {
       const answer = new QiuzAnswerBtn(this.categoryName, this.answers[i]);
 
       answer.appendInto(this.element.querySelector('.question__answers-container'));
+
+      answer.element.addEventListener('click', () => this.handleAnswerBtnClick(answer));
     }
   }
 }
 
 export default QuestionView;
-
-/*  <div class="view quiz__view">
-      <div class="artist__quiz-view">
-        <div class="container">
-          <header class="header">
-            <button class="exit-btn"></button>
-            <div class="timer">
-              <span class="minutes">3</span>
-              :
-              <span class="seconds">49</span>
-            </div>
-          </header>
-          <main class="main">
-            <div class="question-wrap">
-              <div class="question__text"></div>
-              <div class="question__image-wrap">
-                <img class="img" src="" alt="1" >
-              </div>
-              <div class="question__answers-container">
-                <button class="question__answer-btn">Peter Paul Rubens</button>
-                <button class="question__answer-btn">Rembrandt van Rijn</button>
-                <button class="question__answer-btn">Rembrandt van Rijn</button>
-                <button class="question__answer-btn">Peter Paul Rubens</button>
-              </div>
-            </div>
-          </main>
-          <footer class="footer"></footer>
-        </div>
-      </div>
-    </div> */

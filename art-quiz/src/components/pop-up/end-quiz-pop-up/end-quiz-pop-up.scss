@@ -1,0 +1,27 @@
+.end-quiz__pop-up {
+  .result-image {
+    width: 148px;
+    height: 139px;
+  }
+
+  .result-image.quiz-failed {
+    background-image: url('./assets/svg/quiz-failed.svg');
+  }
+
+  .result-image.quiz-passed {
+    background-image: url('./assets/svg/quiz-passed.svg');
+  }
+
+  .result-image.grand-result {
+    width: 277px;
+    height: 107px;
+    background-image: url('./assets/svg/grand-result.svg');
+  }
+
+  .result-text {
+  }
+  .btn {
+  }
+  .colored {
+  }
+}

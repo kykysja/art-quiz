@@ -30,7 +30,7 @@ class QuizView extends BaseComponent {
 
   generateQuestions() {
     for (let i = 0; i < this.quiz.questions.length; i += 1) {
-      new QuestionView(this.categoryName, this.quiz.questions[i]).appendInto(
+      new QuestionView(this.categoryName, this.quiz.quizNum, this.quiz.questions[i], i).appendInto(
         this.element.querySelector('.questions-container')
       );
     }

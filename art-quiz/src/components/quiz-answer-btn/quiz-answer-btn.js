@@ -7,18 +7,16 @@ class QiuzAnswerBtn extends BaseComponent {
     this.element.setAttribute('type', 'button');
 
     this.categoryName = categoryName;
-    this.answer = answer;
+    this.answerData = answer;
 
     this.element.innerHTML =
       this.categoryName === 'artists'
-        ? `${this.answer}`
+        ? `${this.answerData}`
         : `
           <img class="img"
-               src="https://raw.githubusercontent.com/kykysja/art-quiz-data/master/img/${this.answer}.jpg"
+               src="https://raw.githubusercontent.com/kykysja/art-quiz-data/master/img/${this.answerData}.jpg"
                alt="1" />
         `;
-
-    this.element.addEventListener('click', () => this.handleAnswerBtnClick());
   }
 }
 

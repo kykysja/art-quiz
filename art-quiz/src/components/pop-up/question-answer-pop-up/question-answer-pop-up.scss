@@ -1,0 +1,46 @@
+.question-answer__pop-up {
+  .image-wrap {
+    position: relative;
+
+    .img {
+    }
+  }
+
+  .answer-icon {
+    width: 40px;
+    height: 40px;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+  }
+
+  .correct__answer-icon {
+    background-image: url('./assets/svg/correct-icon.svg');
+  }
+
+  .wrong__answer-icon {
+    background-image: url('./assets/svg/wrong-icon.svg');
+  }
+
+  .picture-name {
+    margin-top: 30px;
+    @include font(24px, 24px, 500, normal);
+  }
+
+  .description {
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+  .author {
+  }
+  .year {
+  }
+
+  .btn {
+    margin-top: 25px;
+    width: 85%;
+    @include font(14px, 14px, 500, -0.4px);
+  }
+}

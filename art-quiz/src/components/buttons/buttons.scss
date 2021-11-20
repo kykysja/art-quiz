@@ -9,6 +9,11 @@
   border-radius: 56px;
 }
 
+.colored {
+  background-color: $color-prim;
+  color: $color-font-dark;
+}
+
 .img-btn {
   border-radius: 18px;
   border: 1.8px solid $color-prim-add;
