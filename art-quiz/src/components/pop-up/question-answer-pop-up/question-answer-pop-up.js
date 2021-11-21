@@ -11,9 +11,9 @@ class QuestionAnswerPopUp extends BaseComponent {
     this.question = question;
     this.result = result;
 
-    this.nextQuizBtn = new BaseComponent('button', ['btn', 'colored']);
+    this.nextQuizBtn = new BaseComponent('button', ['btn', 'btn_colored']);
     this.nextQuizBtn.element.setAttribute('type', 'button');
-    this.nextQuizBtn.element.innerHTML = 'Next';
+    this.nextQuizBtn.element.innerHTML = 'Продолжить';
 
     this.element.innerHTML = `
       <div class="pop-up-view question-answer__pop-up">
@@ -47,21 +47,23 @@ class QuestionAnswerPopUp extends BaseComponent {
 
       switch (this.categoryName) {
         case 'artists':
-          numberOfCorrectAnswers = State.artists[this.quizNum - 1].questions.filter(
-            (el) => el.isCorrectAnswered
-          ).length;
+          numberOfCorrectAnswers =
+            State.artists[this.quizNum - 1].gamesStatistic[
+              State.artists[this.quizNum - 1].gamesStatistic.length - 1
+            ].correctAnswers;
           break;
 
         case 'pictures':
-          numberOfCorrectAnswers = State.pictures[this.quizNum - 1].questions.filter(
-            (el) => el.isCorrectAnswered
-          ).length;
+          numberOfCorrectAnswers =
+            State.pictures[this.quizNum - 1].gamesStatistic[
+              State.pictures[this.quizNum - 1].gamesStatistic.length - 1
+            ].correctAnswers;
           break;
 
         default:
       }
 
-      new EndQuizPopUp(numberOfCorrectAnswers).render();
+      new EndQuizPopUp(this.categoryName, this.quizNum, numberOfCorrectAnswers).render();
     }
   }
 

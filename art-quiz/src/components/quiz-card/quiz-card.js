@@ -30,8 +30,6 @@ class QiuzCard extends BaseComponent {
           : ''
       }
     `;
-
-    this.element.querySelector('.img').addEventListener('click', () => this.startQuiz());
   }
 
   countCorrectAnsweredQuestions() {
@@ -47,14 +45,6 @@ class QiuzCard extends BaseComponent {
     }
 
     return correctAnswered.length;
-  }
-
-  startQuiz() {
-    if (this.categoryName === 'artists') {
-      State.artists[this.quiz.quizNum - 1].isPlayed = true;
-    } else if (this.categoryName === 'pictures') {
-      State.pictures[this.quiz.quizNum - 1].isPlayed = true;
-    }
   }
 }
 

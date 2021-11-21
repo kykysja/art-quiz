@@ -2,7 +2,9 @@ import BaseComponent from '../base-component';
 
 class Logo extends BaseComponent {
   constructor() {
-    super('div', ['logo']);
+    super('a', ['logo']);
+
+    this.element.setAttribute('href', '#');
 
     this.element.innerHTML = `
       <span class="logo__text">Art</span>

@@ -1,5 +1,4 @@
 .btn {
-  min-width: 156px;
   padding: 14px 8px 16px;
   @include font(24px, 24px, 500, -0.4px);
   text-transform: capitalize;
@@ -9,7 +8,12 @@
   border-radius: 56px;
 }
 
-.colored {
+.btn_dark {
+  color: $color-font-dark;
+  border: 1px solid $color-font-dark;
+}
+
+.btn_colored {
   background-color: $color-prim;
   color: $color-font-dark;
 }
@@ -57,4 +61,8 @@
   height: 15px;
   background-image: url('./assets/svg/exit-btn.svg');
   background-size: 100% 100%;
+}
+
+.exit-btn_dark {
+  background-image: url('./assets/svg/exit-btn-dark.svg');
 }

@@ -14,9 +14,21 @@ const State = {
       const quizNum = i / 10 + 1;
 
       if (categoryName === 'artists')
-        this.artists.push({ quizNum, isPlayed: false, imageNum: i, questions: [] });
+        this.artists.push({
+          quizNum,
+          isPlayed: false,
+          imageNum: i,
+          questions: [],
+          gamesStatistic: [],
+        });
       else if (categoryName === 'pictures')
-        this.pictures.push({ quizNum, isPlayed: false, imageNum: i + 120, questions: [] });
+        this.pictures.push({
+          quizNum,
+          isPlayed: false,
+          imageNum: i + 120,
+          questions: [],
+          gamesStatistic: [],
+        });
 
       for (let q = i; q < i + 10; q += 1) {
         if (categoryName === 'artists')
