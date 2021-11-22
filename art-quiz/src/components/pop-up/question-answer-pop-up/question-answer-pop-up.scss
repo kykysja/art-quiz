@@ -1,11 +1,4 @@
 .question-answer__pop-up {
-  .image-wrap {
-    position: relative;
-
-    .img {
-    }
-  }
-
   .answer-icon {
     width: 40px;
     height: 40px;
@@ -21,21 +14,6 @@
 
   .wrong__answer-icon {
     background-image: url('./assets/svg/wrong-icon.svg');
-  }
-
-  .picture-name {
-    margin-top: 30px;
-    @include font(24px, 24px, 500, normal);
-  }
-
-  .description {
-    margin-top: 10px;
-    font-style: italic;
-  }
-
-  .author {
-  }
-  .year {
   }
 
   .btn {

@@ -14,10 +14,13 @@
 @import './components/header/header.scss';
 @import './components/footer/footer.scss';
 @import './components/pop-up/pop-up.scss';
+@import './components/question-data/question-data.scss';
 @import './components/pop-up/question-answer-pop-up/question-answer-pop-up.scss';
+@import './components/pop-up/question-data-pop-up/question-data-pop-up.scss';
 @import './components/pop-up/end-quiz-pop-up/end-quiz-pop-up.scss';
 
 @import './views/main-screen/main-screen.scss';
 @import './views/category/category-view';
 @import './views/quiz/quiz-view.scss';
 @import './views/question/question-view.scss';
+@import './views/score/score-view.scss';

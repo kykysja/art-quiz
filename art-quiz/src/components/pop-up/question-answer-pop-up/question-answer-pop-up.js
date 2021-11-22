@@ -1,5 +1,6 @@
 import State from '../../../state/state';
 import BaseComponent from '../../base-component';
+import QuestionData from '../../question-data/question-data';
 import EndQuizPopUp from '../end-quiz-pop-up/end-quiz-pop-up';
 
 class QuestionAnswerPopUp extends BaseComponent {
@@ -11,26 +12,22 @@ class QuestionAnswerPopUp extends BaseComponent {
     this.question = question;
     this.result = result;
 
+    this.questionData = new QuestionData(this.question);
+    this.answerResultIndicator = new BaseComponent('div', [
+      'answer-icon',
+      `${this.result}__answer-icon`,
+    ]);
+
     this.nextQuizBtn = new BaseComponent('button', ['btn', 'btn_colored']);
     this.nextQuizBtn.element.setAttribute('type', 'button');
     this.nextQuizBtn.element.innerHTML = 'Продолжить';
 
     this.element.innerHTML = `
-      <div class="pop-up-view question-answer__pop-up">
-        <div class="image-wrap img-btn">
-          <img class="img"
-               src="https://raw.githubusercontent.com/kykysja/art-quiz-data/master/img/${this.question.imageNum}.jpg"
-               alt="${this.question.imageNum}">
-          <div class="answer-icon ${this.result}__answer-icon"></div>
-        </div>
-        <div class="picture-name">${this.question.name}</div>
-        <div class="description">
-          <span class="author">${this.question.author}</span>,
-          <span class="year">${this.question.year}</span>
-        </div>
-      </div>
+      <div class="pop-up-view question-answer__pop-up"></div>
     `;
 
+    this.questionData.prependInto(this.element.querySelector('.question-answer__pop-up'));
+    this.answerResultIndicator.appendInto(this.questionData.element.querySelector('.image-wrap'));
     this.nextQuizBtn.appendInto(this.element.querySelector('.question-answer__pop-up'));
     this.nextQuizBtn.element.addEventListener('click', this.showNextQuestion.bind(this));
   }
@@ -43,21 +40,19 @@ class QuestionAnswerPopUp extends BaseComponent {
     if (questionsContainer.firstElementChild.nextElementSibling) {
       questionsContainer.removeChild(questionsContainer.firstChild);
     } else {
-      let numberOfCorrectAnswers = null;
+      let numberOfCorrectAnswers = 0;
 
       switch (this.categoryName) {
         case 'artists':
-          numberOfCorrectAnswers =
-            State.artists[this.quizNum - 1].gamesStatistic[
-              State.artists[this.quizNum - 1].gamesStatistic.length - 1
-            ].correctAnswers;
+          numberOfCorrectAnswers = State.artists[this.quizNum - 1].questions.filter(
+            (question) => question.isCorrectAnswered
+          ).length;
           break;
 
         case 'pictures':
-          numberOfCorrectAnswers =
-            State.pictures[this.quizNum - 1].gamesStatistic[
-              State.pictures[this.quizNum - 1].gamesStatistic.length - 1
-            ].correctAnswers;
+          numberOfCorrectAnswers = State.pictures[this.quizNum - 1].questions.filter(
+            (question) => question.isCorrectAnswered
+          ).length;
           break;
 
         default:

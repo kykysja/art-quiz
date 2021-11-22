@@ -1,5 +1,4 @@
 .quiz-card {
-  width: calc((100% - 18px) / 2);
   position: relative;
 
   .card__title {
@@ -7,16 +6,7 @@
   }
 
   .img-btn {
-    display: block;
     margin-top: 10px;
-
-    .img {
-      filter: grayscale(100%);
-    }
-
-    .img.played {
-      filter: grayscale(0%);
-    }
   }
 
   .card__description {

@@ -28,4 +28,20 @@ body {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  row-gap: 15px;
+
+  .card-item {
+    width: calc((100% - 18px) / 2);
+
+    .img-btn {
+      display: block;
+    }
+    .img {
+      filter: grayscale(100%);
+    }
+
+    .img.passed {
+      filter: grayscale(0%);
+    }
+  }
 }

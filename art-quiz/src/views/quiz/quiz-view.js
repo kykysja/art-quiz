@@ -34,10 +34,16 @@ class QuizView extends BaseComponent {
   updateState() {
     if (this.categoryName === 'artists') {
       State.artists[this.quiz.quizNum - 1].isPlayed = true;
-      State.artists[this.quiz.quizNum - 1].gamesStatistic.push({ correctAnswers: 0 });
+
+      for (let i = 0; i < State.artists[this.quiz.quizNum - 1].questions.length; i += 1) {
+        State.artists[this.quiz.quizNum - 1].questions[i].isCorrectAnswered = false;
+      }
     } else if (this.categoryName === 'pictures') {
       State.pictures[this.quiz.quizNum - 1].isPlayed = true;
-      State.pictures[this.quiz.quizNum - 1].gamesStatistic.push({ correctAnswers: 0 });
+
+      for (let i = 0; i < State.pictures[this.quiz.quizNum - 1].questions.length; i += 1) {
+        State.pictures[this.quiz.quizNum - 1].questions[i].isCorrectAnswered = false;
+      }
     }
   }
 

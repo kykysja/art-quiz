@@ -1,0 +1,7 @@
+.question-data__pop-up {
+  .btn {
+    margin-top: 25px;
+    width: 85%;
+    @include font(14px, 14px, 500, -0.4px);
+  }
+}

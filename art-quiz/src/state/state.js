@@ -19,7 +19,6 @@ const State = {
           isPlayed: false,
           imageNum: i,
           questions: [],
-          gamesStatistic: [],
         });
       else if (categoryName === 'pictures')
         this.pictures.push({
@@ -27,7 +26,6 @@ const State = {
           isPlayed: false,
           imageNum: i + 120,
           questions: [],
-          gamesStatistic: [],
         });
 
       for (let q = i; q < i + 10; q += 1) {

@@ -1,21 +1,25 @@
 import State from '../../state/state';
+import ScoreView from '../../views/score/score-view';
 import BaseComponent from '../base-component';
 
 class QiuzCard extends BaseComponent {
   constructor(categoryName, quiz) {
-    super('li', ['quiz-card']);
+    super('li', ['card-item', 'quiz-card']);
 
     this.categoryName = categoryName;
     this.quiz = quiz;
 
+    this.scoreBtn = new BaseComponent('button', ['score-btn']);
+    this.scoreBtn.element.setAttribute('type', 'button');
+
     this.element.innerHTML = `
       <h3 class="card__title">${this.quiz.quizNum} раунд</h3>
       <a class="img-btn" href="#${this.categoryName}/quiz/${this.quiz.quizNum}">
-        <img class="img ${this.quiz.isPlayed ? 'played' : ''}"
+        <img class="img ${this.quiz.isPlayed ? 'passed' : ''}"
              src="https://raw.githubusercontent.com/kykysja/art-quiz-data/master/img/${
                this.quiz.imageNum
              }.jpg"
-             alt="1" />
+             alt="${this.quiz.imageNum}" />
       </a>
       ${
         this.quiz.isPlayed
@@ -24,12 +28,18 @@ class QiuzCard extends BaseComponent {
                 <div class="progress">
                   <span class="right-answers">${this.countCorrectAnsweredQuestions()}</span><span class="total-answers">/10</span>
                 </div>
-                <button class="score-btn" type="button"></button>
               </div>
             `
           : ''
       }
     `;
+
+    if (this.element.querySelector('.card__description')) {
+      this.scoreBtn.appendInto(this.element.querySelector('.card__description'));
+      this.scoreBtn.element.addEventListener('click', () =>
+        new ScoreView(this.categoryName, this.quiz).render()
+      );
+    }
   }
 
   countCorrectAnsweredQuestions() {

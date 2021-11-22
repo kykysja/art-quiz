@@ -72,7 +72,7 @@ class QuestionView extends BaseComponent {
 
     setTimeout(() => {
       new QuestionAnswerPopUp(this.categoryName, this.quizNum, this.question, 'correct').render();
-    }, 800);
+    }, 600);
   }
 
   handleWrongAnswer(answerElement) {
@@ -80,7 +80,7 @@ class QuestionView extends BaseComponent {
 
     setTimeout(() => {
       new QuestionAnswerPopUp(this.categoryName, this.quizNum, this.question, 'wrong').render();
-    }, 800);
+    }, 600);
   }
 
   handleAnswerBtnClick(answer) {
@@ -89,24 +89,24 @@ class QuestionView extends BaseComponent {
         if (answer.element.textContent === this.question.author) {
           State.artists[this.quizNum - 1].questions[this.questionIndex].isCorrectAnswered = true;
 
-          State.artists[this.quizNum - 1].gamesStatistic[
-            State.artists[this.quizNum - 1].gamesStatistic.length - 1
-          ].correctAnswers += 1;
-
           this.handleCorrectAnswer(answer.element);
-        } else this.handleWrongAnswer(answer.element);
+        } else {
+          State.artists[this.quizNum - 1].questions[this.questionIndex].isCorrectAnswered = false;
+
+          this.handleWrongAnswer(answer.element);
+        }
         break;
 
       case 'pictures':
         if (answer.answerData === this.question.imageNum) {
           State.pictures[this.quizNum - 1].questions[this.questionIndex].isCorrectAnswered = true;
 
-          State.pictures[this.quizNum - 1].gamesStatistic[
-            State.pictures[this.quizNum - 1].gamesStatistic.length - 1
-          ].correctAnswers += 1;
-
           this.handleCorrectAnswer(answer.element);
-        } else this.handleWrongAnswer(answer.element);
+        } else {
+          State.pictures[this.quizNum - 1].questions[this.questionIndex].isCorrectAnswered = false;
+
+          this.handleWrongAnswer(answer.element);
+        }
         break;
 
       default:
