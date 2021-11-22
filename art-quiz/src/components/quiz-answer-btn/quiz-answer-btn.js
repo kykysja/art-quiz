@@ -1,3 +1,4 @@
+import { getImage } from '../../api/data';
 import BaseComponent from '../base-component';
 
 class QiuzAnswerBtn extends BaseComponent {
@@ -9,14 +10,20 @@ class QiuzAnswerBtn extends BaseComponent {
     this.categoryName = categoryName;
     this.answerData = answer;
 
-    this.element.innerHTML =
-      this.categoryName === 'artists'
-        ? `${this.answerData}`
-        : `
-          <img class="img"
-               src="https://raw.githubusercontent.com/kykysja/art-quiz-data/master/img/${this.answerData}.jpg"
-               alt="1" />
-        `;
+    if (this.categoryName === 'artists') this.element.innerHTML = `${this.answerData}`;
+    else
+      this.createImage(
+        `https://raw.githubusercontent.com/kykysja/art-quiz-data/master/img/${this.answerData}.jpg`
+      );
+  }
+
+  async createImage(url) {
+    const img = await getImage(url);
+
+    img.className = 'img';
+    img.setAttribute('alt', `${this.answerData}`);
+
+    this.element.prepend(img);
   }
 }
 

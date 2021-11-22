@@ -1,3 +1,4 @@
+import { getImage } from '../../api/data';
 import BaseComponent from '../base-component';
 
 class QuestionData extends BaseComponent {
@@ -7,18 +8,26 @@ class QuestionData extends BaseComponent {
     this.question = question;
 
     this.element.innerHTML = `
-      <div class="image-wrap img-btn">
-        <img class="img"
-             src="https://raw.githubusercontent.com/kykysja/art-quiz-data/master/img/${this.question.imageNum}.jpg"
-             alt="${this.question.imageNum}">
-      </div>
+      <div class="image-wrap img-btn"></div>
       <div class="picture-name">${this.question.name}</div>
       <div class="description">
         <span class="author">${this.question.author}</span>,
         <span class="year">${this.question.year}</span>
       </div>
-
     `;
+
+    this.createImage(
+      `https://raw.githubusercontent.com/kykysja/art-quiz-data/master/img/${this.question.imageNum}.jpg`
+    );
+  }
+
+  async createImage(url) {
+    const img = await getImage(url);
+
+    img.className = 'img';
+    img.setAttribute('alt', `${this.question.imageNum}`);
+
+    this.element.querySelector('.image-wrap').append(img);
   }
 }
 

@@ -4,6 +4,7 @@ import QiuzAnswerBtn from '../../components/quiz-answer-btn/quiz-answer-btn';
 import Timer from '../../components/timer/timer';
 import State from '../../state/state';
 import { getRandomNum, shuffle } from '../../helpers/helpers';
+import { getImage } from '../../api/data';
 
 class QuestionView extends BaseComponent {
   constructor(categoryName, quizNum, question, questionIndex) {
@@ -22,11 +23,7 @@ class QuestionView extends BaseComponent {
         ? `
           <div class="question-wrap">
             <div class="question__text">Кто автор этой картины?</div>
-            <div class="question__image-wrap">
-              <img class="img"
-                   src="https://raw.githubusercontent.com/kykysja/art-quiz-data/master/img/${this.question.imageNum}.jpg"
-                   alt="${this.questionNum}" >
-            </div>
+            <div class="question__image-wrap"></div>
             <div class="question__answers-container"></div>
           </div>
         `
@@ -37,8 +34,21 @@ class QuestionView extends BaseComponent {
           </div>
         `;
 
+    this.createImage(
+      `https://raw.githubusercontent.com/kykysja/art-quiz-data/master/img/${this.question.imageNum}.jpg`
+    );
+
     this.timer.prependInto(this.element);
     this.generateAnswers();
+  }
+
+  async createImage(url) {
+    const img = await getImage(url);
+
+    img.className = 'img';
+    img.setAttribute('alt', `${this.questionNum}`);
+
+    this.element.querySelector('.question__image-wrap').prepend(img);
   }
 
   getAuthors() {

@@ -1,4 +1,4 @@
-import getData from '../api/data';
+import { getData } from '../api/data';
 import { getFromLocalStorage } from '../local-storage/local-storage';
 
 const State = {

@@ -1,0 +1,33 @@
+.interrupt-quiz__pop-up {
+  .pop-up-wrap {
+  }
+
+  .text {
+    margin: 30px auto 0;
+    max-width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    @include font(22px, 22px, 400, -0.5px);
+
+    span {
+      &:last-child {
+        @include font(22px, 22px, 500, -0.5px);
+      }
+    }
+  }
+
+  .buttons-container {
+    margin-top: 35px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .btn {
+    width: calc((100% - 10px) / 2);
+    padding: 7px 6px;
+    height: 48px;
+    @include font(16px, 16px, 500, -0.91px);
+  }
+}

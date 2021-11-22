@@ -1,6 +1,7 @@
 import BaseComponent from '../../components/base-component';
 import ExitQuizBtn from '../../components/buttons/exit-quiz-btn';
 import Footer from '../../components/footer/footer';
+import InterruptQuizPopUp from '../../components/pop-up/interrupt-quiz-pop-up/interrupt-quiz-pop-up';
 import State from '../../state/state';
 import QuestionView from '../question/question-view';
 
@@ -28,6 +29,9 @@ class QuizView extends BaseComponent {
 
     this.exitBtn.prependInto(this.element.querySelector('.main'));
     this.footer.appendInto(this.element.querySelector('.container'));
+    this.exitBtn.element.addEventListener('click', () =>
+      new InterruptQuizPopUp(this.categoryName).render()
+    );
     this.generateQuestions();
   }
 

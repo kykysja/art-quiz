@@ -1,6 +1,7 @@
 import State from '../../state/state';
 import ScoreView from '../../views/score/score-view';
 import BaseComponent from '../base-component';
+import { getImage } from '../../api/data';
 
 class QiuzCard extends BaseComponent {
   constructor(categoryName, quiz) {
@@ -14,19 +15,14 @@ class QiuzCard extends BaseComponent {
 
     this.element.innerHTML = `
       <h3 class="card__title">${this.quiz.quizNum} раунд</h3>
-      <a class="img-btn" href="#${this.categoryName}/quiz/${this.quiz.quizNum}">
-        <img class="img ${this.quiz.isPlayed ? 'passed' : ''}"
-             src="https://raw.githubusercontent.com/kykysja/art-quiz-data/master/img/${
-               this.quiz.imageNum
-             }.jpg"
-             alt="${this.quiz.imageNum}" />
-      </a>
+      <a class="img-btn" href="#${this.categoryName}/quiz/${this.quiz.quizNum}"></a>
       ${
         this.quiz.isPlayed
           ? `
               <div class="card__description">
                 <div class="progress">
-                  <span class="right-answers">${this.countCorrectAnsweredQuestions()}</span><span class="total-answers">/10</span>
+                  <span class="right-answers">${this.countCorrectAnsweredQuestions()}</span>
+                  <span class="total-answers">/10</span>
                 </div>
               </div>
             `
@@ -34,12 +30,25 @@ class QiuzCard extends BaseComponent {
       }
     `;
 
+    this.createImage(
+      `https://raw.githubusercontent.com/kykysja/art-quiz-data/master/img/${this.quiz.imageNum}.jpg`
+    );
+
     if (this.element.querySelector('.card__description')) {
       this.scoreBtn.appendInto(this.element.querySelector('.card__description'));
       this.scoreBtn.element.addEventListener('click', () =>
         new ScoreView(this.categoryName, this.quiz).render()
       );
     }
+  }
+
+  async createImage(url) {
+    const img = await getImage(url);
+
+    img.className = `img${this.quiz.isPlayed ? ' passed' : ''}`;
+    img.setAttribute('alt', `${this.quiz.imageNum}`);
+
+    this.element.querySelector('.img-btn').append(img);
   }
 
   countCorrectAnsweredQuestions() {
