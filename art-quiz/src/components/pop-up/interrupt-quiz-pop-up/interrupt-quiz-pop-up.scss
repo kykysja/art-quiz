@@ -26,8 +26,15 @@
 
   .btn {
     width: calc((100% - 10px) / 2);
-    padding: 7px 6px;
+    padding: 0;
     height: 48px;
     @include font(16px, 16px, 500, -0.91px);
+
+    a {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }

@@ -12,6 +12,9 @@ class QiuzCard extends BaseComponent {
 
     this.scoreBtn = new BaseComponent('button', ['score-btn']);
     this.scoreBtn.element.setAttribute('type', 'button');
+    this.scoreBtn.element.innerHTML = `
+      <a href="#${this.categoryName}/quiz/${this.quiz.quizNum}/score"></a>
+    `;
 
     this.element.innerHTML = `
       <h3 class="card__title">${this.quiz.quizNum} раунд</h3>
@@ -36,9 +39,6 @@ class QiuzCard extends BaseComponent {
 
     if (this.element.querySelector('.card__description')) {
       this.scoreBtn.appendInto(this.element.querySelector('.card__description'));
-      this.scoreBtn.element.addEventListener('click', () =>
-        new ScoreView(this.categoryName, this.quiz).render()
-      );
     }
   }
 

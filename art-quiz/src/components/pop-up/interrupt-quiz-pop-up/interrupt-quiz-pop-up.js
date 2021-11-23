@@ -12,7 +12,11 @@ class InterruptQuizPopUp extends BaseComponent {
 
     this.confirmBtn = new BaseComponent('button', ['btn', 'btn_colored']);
     this.confirmBtn.element.setAttribute('type', 'button');
-    this.confirmBtn.element.innerHTML = `<a href="#${this.categoryName}">Выйти</a>`;
+    this.confirmBtn.element.innerHTML = `
+      <a href="#${this.categoryName}">
+        <span>Выйти</span>
+      </a>
+    `;
 
     this.element.innerHTML = `
       <div class="pop-up-view interrupt-quiz__pop-up">

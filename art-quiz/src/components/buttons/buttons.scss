@@ -50,10 +50,13 @@
 }
 
 .score-btn {
-  width: 28px;
-  height: 28px;
-  background-image: url('./assets/svg/score-btn.svg');
-  background-size: 100% 100%;
+  a {
+    display: block;
+    width: 28px;
+    height: 28px;
+    background-image: url('./assets/svg/score-btn.svg');
+    background-size: 100% 100%;
+  }
 }
 
 .exit-btn {
