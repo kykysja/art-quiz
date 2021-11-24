@@ -2,7 +2,7 @@ import BaseComponent from '../base-component';
 
 class CategoryBtn extends BaseComponent {
   constructor(categoryName) {
-    super('button', ['btn', 'category-btn']);
+    super('button', ['btn', 'category-btn', 'animated-border']);
 
     this.element.setAttribute('type', 'button');
 

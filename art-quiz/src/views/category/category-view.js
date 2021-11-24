@@ -20,19 +20,19 @@ class CategoryView extends BaseComponent {
 
     this.element.innerHTML = `
       <div class="${this.categoryName}__category-view">
-        <div class="container">
-          <main class="main">
+        <main class="main">
+          <div class="container">
             <h2 class="title">${this.categoryName === 'artists' ? 'художники' : 'картины'}</h2>
-          </main>
-        </div>
+          </div>
+        </main>
       </div>
     `;
 
-    this.header.prependInto(this.element.querySelector('.container'));
-    this.logo.prependInto(this.header.element);
-    this.settingsBtn.appendInto(this.header.element);
-    this.quizzesCardsContainer.appendInto(this.element.querySelector('.main'));
-    this.footer.appendInto(this.element.querySelector('.container'));
+    this.header.prependInto(this.element.querySelector(`.${this.categoryName}__category-view`));
+    this.logo.prependInto(this.header.element.querySelector('.container'));
+    this.settingsBtn.appendInto(this.header.element.querySelector('.container'));
+    this.quizzesCardsContainer.appendInto(this.element.querySelector('.main .container'));
+    this.footer.appendInto(this.element.querySelector(`.${this.categoryName}__category-view`));
     this.generateQuizCards();
   }
 

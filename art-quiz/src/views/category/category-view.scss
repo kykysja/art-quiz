@@ -1,8 +1,29 @@
 .category__view {
-  .container {
+  @include media-desktop {
+    height: 100vh;
+
+    & > * {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   .header {
+    .container {
+      padding-left: 0;
+      padding-right: 0;
+
+      @include media-desktop {
+        padding-left: 50px;
+        padding-right: 50px;
+      }
+
+      @include media-desktop-large {
+        padding-left: 100px;
+        padding-right: 100px;
+      }
+    }
   }
 
   .logo {
@@ -15,10 +36,32 @@
   }
 
   .main {
+    @include media-desktop {
+      flex-grow: 1;
+    }
+
+    .container {
+      height: 100%;
+
+      @include media-desktop {
+        padding-left: 50px;
+        padding-right: 50px;
+      }
+
+      @include media-desktop-large {
+        padding-left: 100px;
+        padding-right: 100px;
+      }
+    }
   }
 
   .title {
     margin-top: 27px;
+    @include font(24px, 24px, 500, -0.5px);
+
+    @include media-tablet-small {
+      @include font(36px, 36px, 500, -0.91px);
+    }
   }
 
   .cards-container {
@@ -27,5 +70,7 @@
 
   .footer {
     margin-top: 50px;
+    .container {
+    }
   }
 }

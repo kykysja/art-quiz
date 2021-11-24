@@ -3,16 +3,18 @@
   background-image: url('./assets/images/main-screen-bg.jpg');
   background-size: cover;
   background-position: center center;
-
-  .container {
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   .main {
     flex-grow: 1;
+
+    .container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   .settings-btn-wrap {
@@ -20,20 +22,83 @@
     justify-content: flex-end;
   }
 
+  .content-wrap {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
   .logo-wrap {
-    margin-top: 277px;
     display: flex;
     justify-content: center;
+
+    @include media-tablet-small {
+      .logo {
+        height: 120px;
+        padding-left: 25px;
+        background-size: auto 100%;
+        background-position-x: left;
+      }
+
+      .logo__text {
+        @include font(81px, 116px, 700, -1.77px);
+
+        &:last-child {
+          padding-left: 20px;
+        }
+      }
+    }
+
+    @include media-desktop {
+      .logo {
+        height: 160px;
+      }
+
+      .logo__text {
+        @include font(112px, 159px, 700, -2.42px);
+
+        &:last-child {
+          padding-left: 30px;
+        }
+      }
+    }
   }
 
   .category-btns-container {
-    margin-top: 32px;
+    max-width: 270px;
+    margin: 32px auto 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     row-gap: 20px;
+
+    @include media-desktop {
+      max-width: 100%;
+      column-gap: 50px;
+      margin-top: 100px;
+    }
   }
 
   .footer {
+    margin-top: 50px;
+
+    @include media-mobile-large {
+      margin-top: 70px;
+    }
+
+    @include media-tablet-small {
+      margin-top: 100px;
+    }
+  }
+
+  @include media-tablet {
+    background-position: center top;
+  }
+
+  @include media-desktop {
+    background-image: url('./assets/images/main-screen-bg_desktop.jpg');
+    background-position: center center;
+  }
+  .container {
   }
 }

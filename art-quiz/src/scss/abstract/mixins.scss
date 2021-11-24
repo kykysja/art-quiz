@@ -4,3 +4,41 @@
   font-weight: $weight;
   letter-spacing: $spacing;
 }
+
+@mixin adaptiveProperty($property, $maketWidth, $breakpoint, $valueMaket, $valueBreakpoint) {
+  $addSize: $valueMaket - $valueBreakpoint;
+  $width: $maketWidth - $breakpoint;
+  #{$property}: calc(
+    #{$valueBreakpoint + px} + #{$addSize} * ((100vw - #{$breakpoint + px}) / #{$width})
+  );
+}
+
+@mixin media-desktop-large {
+  @media (min-width: 1440px) {
+    @content;
+  }
+}
+
+@mixin media-desktop {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin media-tablet {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin media-tablet-small {
+  @media (min-width: 520px) {
+    @content;
+  }
+}
+
+@mixin media-mobile-large {
+  @media (min-width: 360px) {
+    @content;
+  }
+}

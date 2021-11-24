@@ -3,7 +3,11 @@ import BaseComponent from '../base-component';
 
 class QiuzAnswerBtn extends BaseComponent {
   constructor(categoryName, answer) {
-    super('button', ['question__answer-btn', `${categoryName === 'artists' ? 'btn' : 'img-btn'}`]);
+    super('button', [
+      'question__answer-btn',
+      `${categoryName === 'artists' ? 'btn' : 'img-btn'}`,
+      'animated-border',
+    ]);
 
     this.element.setAttribute('type', 'button');
 

@@ -8,18 +8,20 @@ class MainScreen extends BaseComponent {
   constructor() {
     super('div', ['view', 'main-screen__view']);
 
-    /* alert(
+    alert(
       'Работу буду еще доделывать. Если не трудно, проверьте пожалуйста в последний день. Спасибо!'
-    ); */
+    );
 
     this.element.innerHTML = `
-      <div class="container">
-        <main class="main">
+      <main class="main">
+        <div class="container">
           <div class="settings-btn-wrap"></div>
-          <div class="logo-wrap"></div>
-          <div class="category-btns-container"></div>
-        </main>
-      </div>
+          <div class="content-wrap">
+            <div class="logo-wrap"></div>
+            <div class="category-btns-container"></div>
+          </div>
+        </div>
+      </main>
     `;
 
     this.settingsBtn = new SettingsBtn();
@@ -32,7 +34,7 @@ class MainScreen extends BaseComponent {
     this.logo.appendInto(this.element.querySelector('.logo-wrap'));
     this.artistsBtn.prependInto(this.element.querySelector('.category-btns-container'));
     this.picturesBtn.appendInto(this.element.querySelector('.category-btns-container'));
-    this.footer.appendInto(this.element.querySelector('.container'));
+    this.footer.appendInto(this.element);
   }
 
   render() {

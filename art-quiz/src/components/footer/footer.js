@@ -5,10 +5,9 @@ class Footer extends BaseComponent {
     super('footer', ['footer']);
 
     this.element.innerHTML = `
-
+      <div class="container">
         <a class="rss-logo" href="https://rs.school" target="blank"></a>
         <div class="footer__author">
-          <span>created by: </span>
           <a
             class="author__link"
             href="https://github.com/kykysja?tab=repositories"
@@ -17,7 +16,7 @@ class Footer extends BaseComponent {
           >
         </div>
         <span class="footer__date">2021</span>
-
+      </div>
     `;
   }
 }

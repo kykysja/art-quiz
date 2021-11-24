@@ -8,7 +8,9 @@ class QuestionData extends BaseComponent {
     this.question = question;
 
     this.element.innerHTML = `
-      <div class="image-wrap img-btn"></div>
+      <div class="image-wrap img-btn">
+        <div class="loading">Load ...</div>
+      </div>
       <div class="picture-name">${this.question.name}</div>
       <div class="description">
         <span class="author">${this.question.author}</span>,
@@ -27,7 +29,9 @@ class QuestionData extends BaseComponent {
     img.className = 'img';
     img.setAttribute('alt', `${this.question.imageNum}`);
 
-    this.element.querySelector('.image-wrap').append(img);
+    this.element.querySelector('.loading').remove();
+    this.element.querySelector('.image-wrap').classList.remove('loading');
+    this.element.querySelector('.image-wrap').prepend(img);
   }
 }
 

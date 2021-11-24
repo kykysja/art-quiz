@@ -1,11 +1,25 @@
+.animated-border {
+  outline: 1px solid;
+  outline-color: $color-font-base;
+  outline-offset: -2px;
+  // transition: all 0.4s cubic-bezier(0.2, 0, 0, 0.8);
+}
+
+.animated-border:hover {
+  letter-spacing: 1.2px;
+  outline-color: rgba(71, 126, 232, 0);
+  outline-offset: 40px;
+}
+
 .btn {
   padding: 14px 8px 16px;
   @include font(24px, 24px, 500, -0.4px);
   text-transform: capitalize;
   text-align: center;
   color: $color-font-base;
-  border: 1px solid $color-font-base;
+  // border: 1px solid $color-font-base;
   border-radius: 56px;
+  transition: all 0.4s cubic-bezier(0.2, 0, 0, 0.8);
 }
 
 .btn_dark {
@@ -35,6 +49,11 @@
     height: 34px;
     background-image: url('./assets/svg/settings-btn.svg');
     background-size: 100% 100%;
+    transition: all 0.4s cubic-bezier(0.2, 0, 0, 0.8);
+
+    &:hover {
+      transform: rotate(360deg) scale(1.1);
+    }
   }
 }
 
@@ -56,6 +75,11 @@
     height: 28px;
     background-image: url('./assets/svg/score-btn.svg');
     background-size: 100% 100%;
+    transition: all 0.4s cubic-bezier(0.2, 0, 0, 0.8);
+
+    &:hover {
+      transform: rotate(360deg) scale(1.1);
+    }
   }
 }
 

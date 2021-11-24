@@ -23,20 +23,21 @@ class QuestionView extends BaseComponent {
         ? `
           <div class="question-wrap">
             <div class="question__text">Кто автор этой картины?</div>
-            <div class="question__image-wrap"></div>
+            <div class="question__image-wrap">Load ...</div>
             <div class="question__answers-container"></div>
           </div>
         `
         : `
           <div class="question-wrap">
-            <div class="question__text">Какую из этих картин нарисовал ${this.question.author}</div>
+            <div class="question__text">Какую из этих картин нарисовал ${this.question.author}?</div>
             <div class="question__answers-container"></div>
           </div>
         `;
 
-    this.createImage(
-      `https://raw.githubusercontent.com/kykysja/art-quiz-data/master/img/${this.question.imageNum}.jpg`
-    );
+    if (this.categoryName === 'artists')
+      this.createImage(
+        `https://raw.githubusercontent.com/kykysja/art-quiz-data/master/img/${this.question.imageNum}.jpg`
+      );
 
     this.timer.prependInto(this.element);
     this.generateAnswers();
@@ -45,9 +46,10 @@ class QuestionView extends BaseComponent {
   async createImage(url) {
     const img = await getImage(url);
 
-    img.className = 'img';
-    img.setAttribute('alt', `${this.questionNum}`);
+    img.classList.add('img');
+    img.setAttribute('alt', 'image');
 
+    this.element.querySelector('.question__image-wrap').innerHTML = '';
     this.element.querySelector('.question__image-wrap').prepend(img);
   }
 

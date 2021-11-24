@@ -1,5 +1,4 @@
 import State from '../../state/state';
-import ScoreView from '../../views/score/score-view';
 import BaseComponent from '../base-component';
 import { getImage } from '../../api/data';
 
@@ -18,7 +17,16 @@ class QiuzCard extends BaseComponent {
 
     this.element.innerHTML = `
       <h3 class="card__title">${this.quiz.quizNum} раунд</h3>
-      <a class="img-btn" href="#${this.categoryName}/quiz/${this.quiz.quizNum}"></a>
+      <div class="img-btn">
+        <a class="card__play-btn"
+           href="#${this.categoryName}/quiz/${this.quiz.quizNum}">${
+      this.quiz.isPlayed
+        ? '<span class="play-again-btn"></span><span>Play Again</span>'
+        : '<span>Play Quiz</span>'
+    }
+        </a>
+        <div class="loading">Load ...</div>
+      </div>
       ${
         this.quiz.isPlayed
           ? `
@@ -48,7 +56,9 @@ class QiuzCard extends BaseComponent {
     img.className = `img${this.quiz.isPlayed ? ' passed' : ''}`;
     img.setAttribute('alt', `${this.quiz.imageNum}`);
 
-    this.element.querySelector('.img-btn').append(img);
+    // this.element.querySelector('.img-btn').innerHTML = '';
+    this.element.querySelector('.loading').remove();
+    this.element.querySelector('.img-btn').prepend(img);
   }
 
   countCorrectAnsweredQuestions() {

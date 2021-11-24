@@ -21,23 +21,23 @@ class ScoreView extends BaseComponent {
 
     this.element.innerHTML = `
       <div class="${this.categoryName}__score-view">
-        <div class="container">
-          <main class="main">
+        <main class="main">
+          <div class="container">
             <h2 class="title">${
               this.categoryName === 'artists'
                 ? `Художники / Раунд ${this.quiz.quizNum}`
                 : `Kартины / Раунд ${this.quiz.quizNum}`
             }</h2>
-          </main>
-        </div>
+          </div>
+        </main>
       </div>
     `;
 
-    this.header.prependInto(this.element.querySelector('.container'));
-    this.logo.prependInto(this.header.element);
-    this.settingsBtn.appendInto(this.header.element);
-    this.questionsCardsContainer.appendInto(this.element.querySelector('.main'));
-    this.footer.appendInto(this.element.querySelector('.container'));
+    this.header.prependInto(this.element.querySelector(`.${this.categoryName}__score-view`));
+    this.logo.prependInto(this.header.element.querySelector('.container'));
+    this.settingsBtn.appendInto(this.header.element.querySelector('.container'));
+    this.questionsCardsContainer.appendInto(this.element.querySelector('.main .container'));
+    this.footer.appendInto(this.element.querySelector(`.${this.categoryName}__score-view`));
     this.generateQuestionCards();
   }
 

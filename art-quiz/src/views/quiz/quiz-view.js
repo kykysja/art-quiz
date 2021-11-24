@@ -18,17 +18,17 @@ class QuizView extends BaseComponent {
     this.footer = new Footer();
 
     this.element.innerHTML = `
-      <div class="container">
-        <main class="main">
+      <main class="main">
+        <div class="container">
           <div class="slider-wrap">
             <div class="questions-container"></div>
           </div>
-        </main>
-      </div>
+        </div>
+      </main>
     `;
 
-    this.exitBtn.prependInto(this.element.querySelector('.main'));
-    this.footer.appendInto(this.element.querySelector('.container'));
+    this.exitBtn.prependInto(this.element.querySelector('.container'));
+    this.footer.appendInto(this.element);
     this.exitBtn.element.addEventListener('click', () =>
       new InterruptQuizPopUp(this.categoryName).render()
     );

@@ -8,16 +8,14 @@ body {
   color: $color-font-base;
 }
 
-#root {
-  min-height: 100vh;
-}
-
 .view {
   width: 100%;
-  min-height: 100vh;
-  padding-top: 22px;
-  padding-bottom: 10px;
+  padding: 22px 16px 10px;
   background-color: $color-bg-dark;
+
+  @include media-desktop {
+    padding-top: 45px;
+  }
 }
 
 .title {
@@ -26,16 +24,45 @@ body {
 
 .cards-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
   row-gap: 15px;
+  column-gap: 18px;
+
+  @include media-tablet-small {
+    row-gap: 25px;
+    column-gap: 20px;
+  }
+
+  @include media-desktop {
+    column-gap: 20px;
+  }
 
   .card-item {
     width: calc((100% - 18px) / 2);
 
+    @include media-tablet-small {
+      width: calc((100% - 40px) / 3);
+    }
+
+    @include media-desktop {
+      width: calc((100% - 100px) / 6);
+    }
+
     .img-btn {
       display: block;
+
+      @include adaptiveProperty(height, 320, 519, 135, 235);
+
+      @include media-tablet-small {
+        @include adaptiveProperty(height, 520, 1023, 146, 313);
+      }
+
+      @include media-desktop {
+        @include adaptiveProperty(height, 1024, 1920, 128, 261);
+      }
     }
+
     .img {
       filter: grayscale(100%);
     }
@@ -43,5 +70,18 @@ body {
     .img.passed {
       filter: grayscale(0%);
     }
+  }
+}
+
+.loading {
+  @include font(20px, 20px, 500);
+  color: $color-prim;
+  padding-top: 10px;
+  padding-left: 10px;
+
+  @include media-mobile-large {
+    @include font(24px, 24px, 500);
+    padding-top: 20px;
+    padding-left: 20px;
   }
 }
