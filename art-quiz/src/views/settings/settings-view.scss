@@ -1,0 +1,236 @@
+.settings__view {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .header {
+    .container {
+      height: 100%;
+      position: relative;
+    }
+  }
+
+  .prev-view-btn {
+    position: absolute;
+    top: 4px;
+    left: 0;
+
+    a {
+      display: block;
+      width: 10px;
+      height: 20px;
+      background-image: url('./assets/svg/prev-view-btn.svg');
+      background-size: 100% 100%;
+    }
+  }
+
+  .view-name {
+    width: 100%;
+    @include font(24px, 28px, 500, -0.5px);
+    text-align: center;
+  }
+
+  .main {
+    flex-grow: 1;
+
+    .container {
+      @include media-mobile-large {
+        max-width: 360px;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  .setting-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .volume-setting-wrap {
+    margin-top: 50px;
+  }
+
+  .setting__title {
+    @include font(30px, 30px, 700, -0.91px);
+  }
+
+  .volume-input {
+    margin-top: 28px;
+  }
+
+  .volume__controls {
+    margin-top: 12px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .volume-btn {
+      height: 16px;
+      background-size: 100% 100%;
+    }
+
+    .off-btn {
+      width: 23px;
+      background-image: url('./assets/svg/volume-off-icon.svg');
+    }
+
+    .on-btn {
+      width: 16px;
+      background-image: url('./assets/svg/volume-on-icon.svg');
+    }
+  }
+
+  .off-btn {
+  }
+  .on-btn {
+  }
+
+  .timer-setting-wrap {
+    margin-top: 40px;
+  }
+
+  .time-game {
+  }
+  .time-game__controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
+  }
+  .text {
+  }
+  .toggle {
+  }
+  .toggle-switch {
+  }
+  .timer-off-mode {
+  }
+  .time-duration {
+    margin-top: 50px;
+  }
+
+  .time-duration__controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 25px;
+
+    .time-duration__btn {
+      width: 33px;
+      height: 33px;
+      background-size: 100% 100%;
+    }
+
+    .minus-btn {
+      background-image: url('./assets/svg/minus-icon.svg');
+    }
+    .output {
+      @include font(24px, 28px, 500, -0.5px);
+    }
+    .plus-btn {
+      background-image: url('./assets/svg/plus-icon.svg');
+    }
+  }
+
+  .buttons-container {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+
+  .buttons-container.centered {
+    justify-content: center;
+  }
+
+  .btn {
+    border: 1px solid $color-font-base;
+    @include font(20px, 20px, 500, -0.5px);
+    width: calc((100% - 10px) / 2);
+    padding: 7px 6px;
+    height: 48px;
+    // @include font(16px, 16px, 500, -0.91px);
+  }
+  .btn_colored {
+  }
+
+  .footer {
+    margin-top: 40px;
+    .container {
+    }
+  }
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+  margin-right: 20px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  border-radius: 25px;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.7s;
+  background: $color-prim;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+.volume-input {
+  background: linear-gradient(to right, $color-prim 0%, $color-prim 40%, #c4c4c4 40%, #c4c4c4 100%);
+  height: 3px;
+  width: 100%;
+  outline: none;
+  transition: background 4.5s ease-in;
+  -webkit-appearance: none;
+
+  /* @include media-tablet {
+    width: 564px;
+    height: 5px;
+  } */
+}
+
+.volume-input::-webkit-slider-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  -webkit-appearance: none;
+  background: $color-font-base;
+  cursor: pointer;
+
+  /* @include media-tablet-small {
+    width: 13px;
+    height: 13px;
+  } */
+}

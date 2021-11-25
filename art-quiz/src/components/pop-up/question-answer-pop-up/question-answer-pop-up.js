@@ -1,6 +1,7 @@
 import State from '../../../state/state';
 import BaseComponent from '../../base-component';
 import QuestionData from '../../question-data/question-data';
+import timer from '../../timer/timer';
 import EndQuizPopUp from '../end-quiz-pop-up/end-quiz-pop-up';
 
 class QuestionAnswerPopUp extends BaseComponent {
@@ -39,6 +40,8 @@ class QuestionAnswerPopUp extends BaseComponent {
 
     if (questionsContainer.firstElementChild.nextElementSibling) {
       questionsContainer.removeChild(questionsContainer.firstChild);
+
+      if (State.settings.timeGame) timer.start(State.settings.timeToAnswer, this.question);
     } else {
       let numberOfCorrectAnswers = 0;
 

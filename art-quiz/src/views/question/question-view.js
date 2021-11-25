@@ -1,10 +1,10 @@
 import BaseComponent from '../../components/base-component';
 import QuestionAnswerPopUp from '../../components/pop-up/question-answer-pop-up/question-answer-pop-up';
 import QiuzAnswerBtn from '../../components/quiz-answer-btn/quiz-answer-btn';
-import Timer from '../../components/timer/timer';
 import State from '../../state/state';
 import { getRandomNum, shuffle } from '../../helpers/helpers';
 import { getImage } from '../../api/data';
+import timer from '../../components/timer/timer';
 
 class QuestionView extends BaseComponent {
   constructor(categoryName, quizNum, question, questionIndex) {
@@ -15,7 +15,11 @@ class QuestionView extends BaseComponent {
     this.question = question;
     this.questionIndex = questionIndex;
 
-    this.timer = new Timer();
+    this.timer = new BaseComponent('div', ['timer-output']);
+    this.timer.element.innerHTML = `
+      <div class="seconds">-</div>
+    `;
+
     this.answers = this.categoryName === 'artists' ? this.getAuthors() : this.getImagesNums();
 
     this.element.innerHTML =
@@ -40,7 +44,37 @@ class QuestionView extends BaseComponent {
       );
 
     this.timer.prependInto(this.element);
+
     this.generateAnswers();
+
+    this.timer.element.querySelector('.seconds').firstChild.addEventListener(
+      'DOMCharacterDataModified',
+      (event) => {
+        if (event.newValue < 1) {
+          timer.stop();
+
+          switch (this.categoryName) {
+            case 'artists':
+              State.artists[this.quizNum - 1].questions[
+                this.questionIndex
+              ].isCorrectAnswered = false;
+              break;
+
+            case 'pictures':
+              State.pictures[this.quizNum - 1].questions[
+                this.questionIndex
+              ].isCorrectAnswered = false;
+
+              break;
+
+            default:
+          }
+
+          new QuestionAnswerPopUp(this.categoryName, this.quizNum, this.question, 'wrong').render();
+        }
+      },
+      false
+    );
   }
 
   async createImage(url) {
@@ -96,6 +130,8 @@ class QuestionView extends BaseComponent {
   }
 
   handleAnswerBtnClick(answer) {
+    timer.stop();
+
     switch (this.categoryName) {
       case 'artists':
         if (answer.element.textContent === this.question.author) {

@@ -5,14 +5,12 @@
     height: 100%;
   }
 
-  .timer {
-    @include font(16px, 16px, 400, 1.5px);
+  .timer-output {
     display: flex;
     justify-content: flex-end;
 
-    .minutes {
-    }
     .seconds {
+      @include font(16px, 16px, 400, 1.5px);
     }
   }
 

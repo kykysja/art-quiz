@@ -8,10 +8,6 @@ class MainScreen extends BaseComponent {
   constructor() {
     super('div', ['view', 'main-screen__view']);
 
-    alert(
-      'Работу буду еще доделывать. Если не трудно, проверьте пожалуйста в последний день. Спасибо!'
-    );
-
     this.element.innerHTML = `
       <main class="main">
         <div class="container">

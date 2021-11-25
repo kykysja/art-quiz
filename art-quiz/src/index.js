@@ -11,5 +11,6 @@ window.addEventListener('load', async () => {
   window.addEventListener('beforeunload', () => {
     setToLocalStorage('art-quiz-app-artists-quizzes', State.artists);
     setToLocalStorage('art-quiz-app-pictures-quizzes', State.pictures);
+    setToLocalStorage('art-quiz-app-settings', State.settings);
   });
 });

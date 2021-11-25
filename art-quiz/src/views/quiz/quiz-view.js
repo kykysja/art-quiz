@@ -2,6 +2,8 @@ import BaseComponent from '../../components/base-component';
 import ExitQuizBtn from '../../components/buttons/exit-quiz-btn';
 import Footer from '../../components/footer/footer';
 import InterruptQuizPopUp from '../../components/pop-up/interrupt-quiz-pop-up/interrupt-quiz-pop-up';
+import timer from '../../components/timer/timer';
+
 import State from '../../state/state';
 import QuestionView from '../question/question-view';
 
@@ -57,6 +59,7 @@ class QuizView extends BaseComponent {
         this.element.querySelector('.questions-container')
       );
     }
+    if (State.settings.timeGame) timer.start(State.settings.timeToAnswer, this.quiz.questions[0]);
   }
 
   render() {

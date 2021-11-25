@@ -6,6 +6,7 @@ const State = {
   pictures: getFromLocalStorage('art-quiz-app-pictures-quizzes') || [],
   authors: getFromLocalStorage('art-quiz-app-authors') || [],
   fullData: getFromLocalStorage('art-quiz-app-full-data') || [],
+  settings: getFromLocalStorage('art-quiz-app-settings') || {},
 
   async setCategoryQuizzes(categoryName) {
     const data = await getData(`${categoryName}`);
@@ -53,11 +54,17 @@ const State = {
     }
   },
 
+  setSettings() {
+    this.settings.timeGame = false;
+    this.settings.timeToAnswer = 20;
+  },
+
   async setState() {
     if (!this.artists.length) await this.setCategoryQuizzes('artists');
     if (!this.pictures.length) await this.setCategoryQuizzes('pictures');
     if (!this.authors.length) await this.setAuthors();
     if (!this.fullData.length) await this.setFullData();
+    if (!this.settings.timeGame) this.setSettings();
   },
 };
 
