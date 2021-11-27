@@ -10,6 +10,8 @@ class ScoreView extends BaseComponent {
   constructor(categoryName, quiz) {
     super('div', ['view', 'score__view']);
 
+    sessionStorage.setItem('art-quiz-app-last-hash', window.location.hash);
+
     this.categoryName = categoryName;
     this.quiz = quiz;
 

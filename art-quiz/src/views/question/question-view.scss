@@ -73,15 +73,30 @@
       }
     }
 
+    .question__answer-btn.img-btn {
+      @include adaptiveProperty(height, 320, 519, 138, 238);
+
+      @include media-tablet-small {
+        height: 238px;
+      }
+
+      @include media-desktop {
+        height: 232px;
+      }
+      @include media-desktop-large {
+        height: 308px;
+      }
+    }
+
     .btn {
       padding: 8px 6px;
       height: 50px;
       @include font(16px, 16px, 300, -0.91px);
 
-      &:hover {
+      /* &:hover {
         background-color: $color-prim;
         color: $color-font-dark;
-      }
+      } */
     }
 
     .question__answer-btn.correct {

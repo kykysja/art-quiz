@@ -2,5 +2,6 @@
 }
 
 .question__answer-btn:hover {
-  outline-color: transparent;
+  background-color: $color-font-base;
+  color: $color-font-dark;
 }

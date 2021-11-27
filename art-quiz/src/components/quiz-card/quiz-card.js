@@ -56,7 +56,6 @@ class QiuzCard extends BaseComponent {
     img.className = `img${this.quiz.isPlayed ? ' passed' : ''}`;
     img.setAttribute('alt', `${this.quiz.imageNum}`);
 
-    // this.element.querySelector('.img-btn').innerHTML = '';
     this.element.querySelector('.loading').remove();
     this.element.querySelector('.img-btn').prepend(img);
   }

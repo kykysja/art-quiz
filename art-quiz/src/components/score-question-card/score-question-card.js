@@ -10,6 +10,8 @@ class ScoreQuestionCard extends BaseComponent {
 
     this.question = question;
 
+    this.element.innerHTML = '<div class="loading">Load ...</div>';
+
     this.createImage(
       `https://raw.githubusercontent.com/kykysja/art-quiz-data/master/img/${this.question.imageNum}.jpg`
     );
@@ -23,6 +25,7 @@ class ScoreQuestionCard extends BaseComponent {
     img.className = `img${this.question.isCorrectAnswered ? ' passed' : ''}`;
     img.setAttribute('alt', `${this.question.imageNum}`);
 
+    this.element.querySelector('.loading').remove();
     this.element.prepend(img);
   }
 }

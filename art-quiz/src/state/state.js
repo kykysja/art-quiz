@@ -57,6 +57,7 @@ const State = {
   setSettings() {
     this.settings.timeGame = false;
     this.settings.timeToAnswer = 20;
+    this.settings.audioVolume = 0.5;
   },
 
   async setState() {

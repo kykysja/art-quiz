@@ -61,6 +61,16 @@ class QuestionAnswerPopUp extends BaseComponent {
         default:
       }
 
+      if (numberOfCorrectAnswers < 5) {
+        const audio = new Audio('../../../assets/audio/failure.mp3');
+        audio.volume = Number(State.settings.audioVolume);
+        audio.play();
+      } else {
+        const audio = new Audio('../../../assets/audio/success.mp3');
+        audio.volume = Number(State.settings.audioVolume);
+        audio.play();
+      }
+
       new EndQuizPopUp(this.categoryName, this.quizNum, numberOfCorrectAnswers).render();
     }
   }

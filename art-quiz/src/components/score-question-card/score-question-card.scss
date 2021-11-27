@@ -1,3 +1,13 @@
 .question-card {
   position: relative;
+
+  @include adaptiveProperty(height, 320, 519, 135, 235);
+
+  @include media-tablet-small {
+    @include adaptiveProperty(height, 520, 1023, 150, 317);
+  }
+
+  @include media-desktop {
+    @include adaptiveProperty(height, 1024, 1920, 132, 265);
+  }
 }

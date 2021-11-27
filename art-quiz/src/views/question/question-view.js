@@ -115,6 +115,10 @@ class QuestionView extends BaseComponent {
 
   handleCorrectAnswer(answerElement) {
     answerElement.classList.add('correct');
+    const audio = new Audio('./assets/audio/correct.mp3');
+
+    audio.volume = Number(State.settings.audioVolume);
+    audio.play();
 
     setTimeout(() => {
       new QuestionAnswerPopUp(this.categoryName, this.quizNum, this.question, 'correct').render();
@@ -123,6 +127,9 @@ class QuestionView extends BaseComponent {
 
   handleWrongAnswer(answerElement) {
     answerElement.classList.add('wrong');
+    const audio = new Audio('./assets/audio/wrong.mp3');
+    audio.volume = Number(State.settings.audioVolume);
+    audio.play();
 
     setTimeout(() => {
       new QuestionAnswerPopUp(this.categoryName, this.quizNum, this.question, 'wrong').render();

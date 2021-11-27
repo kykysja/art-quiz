@@ -10,7 +10,9 @@ class SettingsView extends BaseComponent {
     this.header = new Header();
     this.prevViewBtn = new BaseComponent('button', ['prev-view-btn']);
     this.prevViewBtn.element.setAttribute('type', 'button');
-    this.prevViewBtn.element.innerHTML = `<a href="#"></a>`;
+    this.prevViewBtn.element.innerHTML = `<a href="${sessionStorage.getItem(
+      'art-quiz-app-last-hash'
+    )}"></a>`;
 
     this.viewNameTitle = new BaseComponent('div', ['view-name']);
     this.viewNameTitle.element.innerHTML = 'Настройки';
@@ -50,7 +52,12 @@ class SettingsView extends BaseComponent {
         <div class="container">
           <div class="setting-wrap volume-setting-wrap">
             <h3 class="setting__title">Звук</h3>
-            <input class="volume-input" type="range" min="1" max="9" step="1" value="4">
+            <div class="input-wrap">
+              <div class="volume"></div>
+              <input class="volume-input" type="range" min="0" max="100" step="1" value="${
+                State.settings.audioVolume * 100
+              }">
+            </div>
             <div class="volume__controls"></div>
           </div>
           <div class="setting-wrap timer-setting-wrap">
@@ -95,6 +102,8 @@ class SettingsView extends BaseComponent {
     this.saveBtn.appendInto(this.element.querySelector('.buttons-container'));
     this.footer.appendInto(this.element);
 
+    this.element.querySelector('.volume').style.width = `${State.settings.audioVolume * 100}%`;
+
     this.minusBtn.element.addEventListener('click', () => {
       if (this.timeOutput.element.textContent > 5) {
         this.timeOutput.element.textContent -= 5;
@@ -110,22 +119,34 @@ class SettingsView extends BaseComponent {
     this.setToDefaultBtn.element.addEventListener('click', () => {
       this.timeOutput.element.textContent = 20;
       State.settings.timeToAnswer = 20;
+      this.element.querySelector('.volume-input').value = 50;
+      this.element.querySelector('.volume').style.width = `50%`;
+      State.settings.audioVolume = 0.5;
       this.timeGameTogleBtn.element.checked = false;
       State.settings.timeGame = false;
     });
 
     this.saveBtn.element.addEventListener('click', () => {
       State.settings.timeToAnswer = this.timeOutput.element.textContent;
+      State.settings.audioVolume = this.element.querySelector('.volume-input').value / 100;
       if (this.timeGameTogleBtn.element.checked) {
         State.settings.timeGame = true;
       } else State.settings.timeGame = false;
     });
 
-    /* this.timeGameTogleBtn.element.addEventListener('change', (event) => {
-      event.target.checked
-        ? (this.element.querySelector('.time-game__controls .text').textContent = 'Вкл.')
-        : (this.element.querySelector('.time-game__controls .text').textContent = 'Выкл.');
-    }); */
+    this.element.querySelector('.volume-input').addEventListener('input', (event) => {
+      this.element.querySelector('.volume').style.width = `${event.target.value}%`;
+    });
+
+    this.volumeOnBtn.element.addEventListener('click', () => {
+      this.element.querySelector('.volume-input').value = 100;
+      this.element.querySelector('.volume').style.width = `100%`;
+    });
+
+    this.volumeOffBtn.element.addEventListener('click', () => {
+      this.element.querySelector('.volume-input').value = 0;
+      this.element.querySelector('.volume').style.width = `0%`;
+    });
   }
 
   render() {

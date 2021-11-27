@@ -10,6 +10,8 @@ class CategoryView extends BaseComponent {
   constructor(categoryName) {
     super('div', ['view', 'category__view']);
 
+    sessionStorage.setItem('art-quiz-app-last-hash', window.location.hash);
+
     this.categoryName = categoryName;
 
     this.header = new Header();

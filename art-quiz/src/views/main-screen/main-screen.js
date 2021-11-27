@@ -8,6 +8,8 @@ class MainScreen extends BaseComponent {
   constructor() {
     super('div', ['view', 'main-screen__view']);
 
+    sessionStorage.setItem('art-quiz-app-last-hash', '#');
+
     this.element.innerHTML = `
       <main class="main">
         <div class="container">

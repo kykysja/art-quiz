@@ -57,7 +57,6 @@
   }
 
   .volume-input {
-    margin-top: 28px;
   }
 
   .volume__controls {
@@ -207,18 +206,25 @@ input:checked + .slider:before {
   transform: translateX(24px);
 }
 
-.volume-input {
-  background: linear-gradient(to right, $color-prim 0%, $color-prim 40%, #c4c4c4 40%, #c4c4c4 100%);
-  height: 3px;
+.input-wrap {
   width: 100%;
-  outline: none;
-  transition: background 4.5s ease-in;
-  -webkit-appearance: none;
+  margin-top: 28px;
+  position: relative;
+}
 
-  /* @include media-tablet {
-    width: 564px;
-    height: 5px;
-  } */
+.volume-input {
+  height: 4px;
+  width: 100%;
+  -webkit-appearance: none;
+}
+
+.volume {
+  position: absolute;
+  width: 50%;
+  height: 4px;
+  background-color: $color-prim;
+  top: 7px;
+  left: 0;
 }
 
 .volume-input::-webkit-slider-thumb {
@@ -228,9 +234,6 @@ input:checked + .slider:before {
   -webkit-appearance: none;
   background: $color-font-base;
   cursor: pointer;
-
-  /* @include media-tablet-small {
-    width: 13px;
-    height: 13px;
-  } */
+  position: relative;
+  z-index: 10;
 }
