@@ -1,5 +1,5 @@
-import { getData } from '../api/data';
-import { getFromLocalStorage } from '../local-storage/local-storage';
+import getData from '../api/data';
+import { getFromLocalStorage } from '../shared/local-storage/local-storage';
 
 const State = {
   artists: getFromLocalStorage('art-quiz-app-artists-quizzes') || [],

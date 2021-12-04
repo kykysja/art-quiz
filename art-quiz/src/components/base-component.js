@@ -12,6 +12,11 @@ class BaseComponent {
   prependInto(parrentElem) {
     parrentElem.prepend(this.element);
   }
+
+  render() {
+    document.querySelector('#root').innerHTML = '';
+    this.appendInto(document.querySelector('#root'));
+  }
 }
 
 export default BaseComponent;

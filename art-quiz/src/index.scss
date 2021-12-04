@@ -8,23 +8,29 @@
 @import './scss/base/base.scss';
 @import './scss/base/layouts.scss';
 
-@import './components/buttons/buttons.scss';
+@import './components/button/buttons.scss';
+@import './components/button/button-link/button-link.scss';
 @import './components/logo/logo.scss';
-@import './components/quiz-card/quiz-card.scss';
 @import './components/header/header.scss';
 @import './components/footer/footer.scss';
-@import './components/pop-up/pop-up.scss';
-@import './components/question-data/question-data.scss';
-@import './components/pop-up/question-answer-pop-up/question-answer-pop-up.scss';
-@import './components/pop-up/question-data-pop-up/question-data-pop-up.scss';
-@import './components/pop-up/end-quiz-pop-up/end-quiz-pop-up.scss';
-@import './components/pop-up/interrupt-quiz-pop-up/interrupt-quiz-pop-up.scss';
-@import './components/quiz-answer-btn/quiz-answer-btn.scss';
-@import './components/score-question-card/score-question-card.scss';
+@import './shared/pop-up/pop-up.scss';
+@import './components/picture-info/picture-info.scss';
 
 @import './views/main-screen/main-screen.scss';
+
 @import './views/category/category-view';
+@import './views/category/quiz-card/quiz-card.scss';
+
 @import './views/quiz/quiz-view.scss';
+@import './views/quiz/end-quiz-pop-up/end-quiz-pop-up.scss';
+@import './views/quiz/interrupt-quiz-pop-up/interrupt-quiz-pop-up.scss';
+
 @import './views/question/question-view.scss';
+@import './views/question/after-answer-pop-up/after-answer-pop-up.scss';
+@import './views/question/answer-btn/answer-btn.scss';
+
 @import './views/score/score-view.scss';
+@import './views/score/picture-info-pop-up/picture-info-pop-up.scss';
+@import './views/score/question-card/question-card.scss';
+
 @import './views/settings/settings-view.scss';

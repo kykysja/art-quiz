@@ -13,16 +13,8 @@
 
   .prev-view-btn {
     position: absolute;
-    top: 4px;
+    top: -6px;
     left: 0;
-
-    a {
-      display: block;
-      width: 10px;
-      height: 20px;
-      background-image: url('./assets/svg/prev-view-btn.svg');
-      background-size: 100% 100%;
-    }
   }
 
   .view-name {
@@ -64,26 +56,6 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-
-    .volume-btn {
-      height: 16px;
-      background-size: 100% 100%;
-    }
-
-    .off-btn {
-      width: 23px;
-      background-image: url('./assets/svg/volume-off-icon.svg');
-    }
-
-    .on-btn {
-      width: 16px;
-      background-image: url('./assets/svg/volume-on-icon.svg');
-    }
-  }
-
-  .off-btn {
-  }
-  .on-btn {
   }
 
   .timer-setting-wrap {
@@ -118,20 +90,8 @@
     align-items: center;
     column-gap: 25px;
 
-    .time-duration__btn {
-      width: 33px;
-      height: 33px;
-      background-size: 100% 100%;
-    }
-
-    .minus-btn {
-      background-image: url('./assets/svg/minus-icon.svg');
-    }
     .output {
       @include font(24px, 28px, 500, -0.5px);
-    }
-    .plus-btn {
-      background-image: url('./assets/svg/plus-icon.svg');
     }
   }
 

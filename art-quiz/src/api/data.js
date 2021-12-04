@@ -1,4 +1,4 @@
-export async function getData(dataName) {
+async function getData(dataName) {
   const res = await fetch(
     `https://raw.githubusercontent.com/kykysja/art-quiz-data/master/${dataName}.json`
   );
@@ -8,11 +8,4 @@ export async function getData(dataName) {
   return data;
 }
 
-export async function getImage(url) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.src = url;
-    img.onload = () => resolve(img);
-    img.onerror = () => reject(new Error('Could not load image'));
-  });
-}
+export default getData;

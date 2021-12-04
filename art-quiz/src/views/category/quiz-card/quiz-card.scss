@@ -1,0 +1,88 @@
+.quiz-card {
+  position: relative;
+
+  .card__title {
+    @include font(18px, 18px, 400, -0.4px);
+
+    @include media-tablet-small {
+      @include font(20px, 20px, 500, -0.63px);
+    }
+  }
+
+  .img-btn {
+    margin-top: 10px;
+    position: relative;
+
+    &:hover {
+      .card__play-btn {
+        max-height: 100px;
+        transition: all 0.4s ease-in;
+        background-color: $color-prim;
+      }
+    }
+  }
+
+  .card__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 12px;
+
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+
+    .progress {
+      padding: 3px 5px;
+      border-radius: 12px;
+      background-color: $color-font-base;
+      opacity: 50%;
+      color: $color-font-dark;
+    }
+
+    .right-answers {
+      @include font(26px, 28px, 700, -0.4px);
+    }
+
+    .total-answers {
+      @include font(18px, 18px, 700, -0.4px);
+    }
+  }
+
+  .card__play-btn {
+    width: 100%;
+    height: 30%;
+
+    @include font(18px, 18px, 700, -0.4px);
+    text-transform: unset;
+    color: $color-font-dark;
+    border-top-left-radius: 18px;
+    background-color: $color-font-base;
+    border-bottom: 0;
+    border-top-right-radius: 18px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s ease-out;
+
+    .repeat-btn {
+      display: block;
+      width: 20px;
+      height: 20px;
+      background-image: url('./assets/svg/repeat-icon.svg');
+      background-size: 100% 100%;
+      margin-right: 7px;
+    }
+  }
+}

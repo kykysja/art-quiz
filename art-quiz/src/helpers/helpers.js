@@ -8,3 +8,7 @@ export function getRandomNum(min, max) {
 export function shuffle(arr) {
   return arr.sort(() => Math.random() - 0.5);
 }
+
+export function generateImageURL(imageNum) {
+  return `https://raw.githubusercontent.com/kykysja/art-quiz-data/master/img/${imageNum}.jpg`;
+}

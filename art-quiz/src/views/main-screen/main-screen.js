@@ -1,8 +1,9 @@
 import BaseComponent from '../../components/base-component';
-import SettingsBtn from '../../components/buttons/settings-btn';
 import Logo from '../../components/logo/logo';
-import CategoryBtn from '../../components/buttons/category-btn';
 import Footer from '../../components/footer/footer';
+
+import Btn from '../../components/button/button';
+import BtnLink from '../../components/button/button-link/button-link';
 
 class MainScreen extends BaseComponent {
   constructor() {
@@ -22,22 +23,23 @@ class MainScreen extends BaseComponent {
       </main>
     `;
 
-    this.settingsBtn = new SettingsBtn();
+    this.settingsBtn = new Btn(['icon-btn', 'settings-btn']);
+    this.settingsBtnLink = new BtnLink('#settings');
     this.logo = new Logo();
-    this.artistsBtn = new CategoryBtn('artists');
-    this.picturesBtn = new CategoryBtn('pictures');
+    this.artistsBtn = new Btn(['btn_light']);
+    this.artistsBtnLink = new BtnLink('#artists', 'Xудожники');
+    this.picturesBtn = new Btn(['btn_light']);
+    this.picturesBtnLink = new BtnLink('#pictures', 'Kартины');
     this.footer = new Footer();
 
-    this.settingsBtn.appendInto(this.element.querySelector('.settings-btn-wrap'));
+    this.settingsBtn.prependInto(this.element.querySelector('.settings-btn-wrap'));
+    this.settingsBtnLink.prependInto(this.settingsBtn.element);
     this.logo.appendInto(this.element.querySelector('.logo-wrap'));
     this.artistsBtn.prependInto(this.element.querySelector('.category-btns-container'));
+    this.artistsBtnLink.prependInto(this.artistsBtn.element);
     this.picturesBtn.appendInto(this.element.querySelector('.category-btns-container'));
+    this.picturesBtnLink.prependInto(this.picturesBtn.element);
     this.footer.appendInto(this.element);
-  }
-
-  render() {
-    document.querySelector('#root').innerHTML = '';
-    this.appendInto(document.querySelector('#root'));
   }
 }
 

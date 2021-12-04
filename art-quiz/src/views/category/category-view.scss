@@ -1,12 +1,8 @@
 .category__view {
   @include media-desktop {
     height: 100vh;
-
-    & > * {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
+    display: flex;
+    flex-direction: column;
   }
 
   .header {

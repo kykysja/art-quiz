@@ -1,9 +1,10 @@
 import BaseComponent from '../../components/base-component';
-import SettingsBtn from '../../components/buttons/settings-btn';
+import Btn from '../../components/button/button';
+import BtnLink from '../../components/button/button-link/button-link';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import Logo from '../../components/logo/logo';
-import QuizCard from '../../components/quiz-card/quiz-card';
+import QuizCard from './quiz-card/quiz-card';
 import State from '../../state/state';
 
 class CategoryView extends BaseComponent {
@@ -15,31 +16,35 @@ class CategoryView extends BaseComponent {
     this.categoryName = categoryName;
 
     this.header = new Header();
-    this.settingsBtn = new SettingsBtn();
+    this.settingsBtn = new Btn(['icon-btn', 'settings-btn']);
+    this.settingsBtnLink = new BtnLink('#settings');
     this.logo = new Logo();
-    this.quizzesCardsContainer = new BaseComponent('ul', ['cards-container']);
+    this.quizzesCardsContainer = new BaseComponent('div', ['cards-container']);
     this.footer = new Footer();
 
     this.element.innerHTML = `
-      <div class="${this.categoryName}__category-view">
         <main class="main">
           <div class="container">
-            <h2 class="title">${this.categoryName === 'artists' ? 'художники' : 'картины'}</h2>
+            <h2 class="title">${this.categoryName === 'artists' ? 'Художники' : 'Картины'}</h2>
           </div>
         </main>
-      </div>
     `;
 
-    this.header.prependInto(this.element.querySelector(`.${this.categoryName}__category-view`));
+    this.header.prependInto(this.element);
     this.logo.prependInto(this.header.element.querySelector('.container'));
     this.settingsBtn.appendInto(this.header.element.querySelector('.container'));
+    this.settingsBtnLink.prependInto(this.settingsBtn.element);
     this.quizzesCardsContainer.appendInto(this.element.querySelector('.main .container'));
-    this.footer.appendInto(this.element.querySelector(`.${this.categoryName}__category-view`));
+    this.footer.appendInto(this.element);
+
     this.generateQuizCards();
   }
 
   async generateQuizCards() {
-    for (let i = 0; i < 12; i += 1) {
+    const numberOfQuizzes =
+      this.categoryName === 'artists' ? State.artists.length : State.pictures.length;
+
+    for (let i = 0; i < numberOfQuizzes; i += 1) {
       const quizCard = new QuizCard(
         this.categoryName,
         this.categoryName === 'artists' ? State.artists[i] : State.pictures[i]
@@ -47,11 +52,6 @@ class CategoryView extends BaseComponent {
 
       quizCard.appendInto(this.quizzesCardsContainer.element);
     }
-  }
-
-  render() {
-    document.querySelector('#root').innerHTML = '';
-    this.appendInto(document.querySelector('#root'));
   }
 }
 

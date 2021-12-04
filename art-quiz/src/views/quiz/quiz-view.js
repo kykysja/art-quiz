@@ -1,22 +1,22 @@
 import BaseComponent from '../../components/base-component';
-import ExitQuizBtn from '../../components/buttons/exit-quiz-btn';
+import Btn from '../../components/button/button';
 import Footer from '../../components/footer/footer';
-import InterruptQuizPopUp from '../../components/pop-up/interrupt-quiz-pop-up/interrupt-quiz-pop-up';
-import timer from '../../components/timer/timer';
-
+import timer from '../../shared/timer/timer';
+import { renderPopUp } from '../../shared/pop-up/pop-up';
 import State from '../../state/state';
 import QuestionView from '../question/question-view';
+import InterruptQuizPopUp from './interrupt-quiz-pop-up/interrupt-quiz-pop-up';
 
 class QuizView extends BaseComponent {
   constructor(categoryName, quiz) {
     super('div', ['view', 'quiz__view']);
 
+    this.updateState();
+
     this.categoryName = categoryName;
     this.quiz = quiz;
 
-    this.updateState();
-
-    this.exitBtn = new ExitQuizBtn();
+    this.exitQuizBtn = new Btn(['icon-btn', 'exit-btn']);
     this.footer = new Footer();
 
     this.element.innerHTML = `
@@ -29,12 +29,14 @@ class QuizView extends BaseComponent {
       </main>
     `;
 
-    this.exitBtn.prependInto(this.element.querySelector('.container'));
+    this.exitQuizBtn.prependInto(this.element.querySelector('.container'));
     this.footer.appendInto(this.element);
-    this.exitBtn.element.addEventListener('click', () =>
-      new InterruptQuizPopUp(this.categoryName).render()
-    );
+
     this.generateQuestions();
+
+    this.exitQuizBtn.element.addEventListener('click', () =>
+      renderPopUp(new InterruptQuizPopUp(this.categoryName))
+    );
   }
 
   updateState() {
@@ -60,11 +62,6 @@ class QuizView extends BaseComponent {
       );
     }
     if (State.settings.timeGame) timer.start(State.settings.timeToAnswer, this.quiz.questions[0]);
-  }
-
-  render() {
-    document.querySelector('#root').innerHTML = '';
-    this.appendInto(document.querySelector('#root'));
   }
 }
 

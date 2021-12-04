@@ -1,10 +1,12 @@
 import BaseComponent from '../../components/base-component';
-import QuestionAnswerPopUp from '../../components/pop-up/question-answer-pop-up/question-answer-pop-up';
-import QiuzAnswerBtn from '../../components/quiz-answer-btn/quiz-answer-btn';
+import AfterAnswerPopUp from './after-answer-pop-up/after-answer-pop-up';
+import AnswerBtn from './answer-btn/answer-btn';
 import State from '../../state/state';
-import { getRandomNum, shuffle } from '../../helpers/helpers';
-import { getImage } from '../../api/data';
-import timer from '../../components/timer/timer';
+import { generateImageURL, getRandomNum, shuffle } from '../../helpers/helpers';
+import timer from '../../shared/timer/timer';
+import { renderPopUp } from '../../shared/pop-up/pop-up';
+import playAudio from '../../shared/audio/audio';
+import Img from '../../components/img/img';
 
 class QuestionView extends BaseComponent {
   constructor(categoryName, quizNum, question, questionIndex) {
@@ -14,20 +16,19 @@ class QuestionView extends BaseComponent {
     this.quizNum = quizNum;
     this.question = question;
     this.questionIndex = questionIndex;
+    this.answers = this.generateAnswers();
 
-    this.timer = new BaseComponent('div', ['timer-output']);
-    this.timer.element.innerHTML = `
-      <div class="seconds">-</div>
-    `;
-
-    this.answers = this.categoryName === 'artists' ? this.getAuthors() : this.getImagesNums();
+    this.timerOutput = new BaseComponent('div', ['timer-output']);
+    this.timerOutput.element.innerHTML = '-';
 
     this.element.innerHTML =
       this.categoryName === 'artists'
         ? `
           <div class="question-wrap">
             <div class="question__text">Кто автор этой картины?</div>
-            <div class="question__image-wrap">Load ...</div>
+            <div class="question__image-wrap">
+              <div class="loading">Load ...</div>
+            </div>
             <div class="question__answers-container"></div>
           </div>
         `
@@ -38,101 +39,78 @@ class QuestionView extends BaseComponent {
           </div>
         `;
 
-    if (this.categoryName === 'artists')
-      this.createImage(
-        `https://raw.githubusercontent.com/kykysja/art-quiz-data/master/img/${this.question.imageNum}.jpg`
-      );
+    this.timerOutput.prependInto(this.element);
 
-    this.timer.prependInto(this.element);
+    if (this.categoryName === 'artists') this.renderImage();
 
-    this.generateAnswers();
+    this.generateAnswerButtons();
 
-    this.timer.element.querySelector('.seconds').firstChild.addEventListener(
-      'DOMCharacterDataModified',
-      (event) => {
-        if (event.newValue < 1) {
-          timer.stop();
-
-          switch (this.categoryName) {
-            case 'artists':
-              State.artists[this.quizNum - 1].questions[
-                this.questionIndex
-              ].isCorrectAnswered = false;
-              break;
-
-            case 'pictures':
-              State.pictures[this.quizNum - 1].questions[
-                this.questionIndex
-              ].isCorrectAnswered = false;
-
-              break;
-
-            default:
-          }
-
-          new QuestionAnswerPopUp(this.categoryName, this.quizNum, this.question, 'wrong').render();
-        }
-      },
-      false
+    this.timerOutput.element.firstChild.addEventListener('DOMCharacterDataModified', (event) =>
+      this.handleTimerOutputChange(event)
     );
   }
 
-  async createImage(url) {
-    const img = await getImage(url);
+  handleTimerOutputChange(event) {
+    if (event.newValue < 1) {
+      timer.stop();
 
-    img.classList.add('img');
-    img.setAttribute('alt', 'image');
+      switch (this.categoryName) {
+        case 'artists':
+          State.artists[this.quizNum - 1].questions[this.questionIndex].isCorrectAnswered = false;
+          break;
 
-    this.element.querySelector('.question__image-wrap').innerHTML = '';
-    this.element.querySelector('.question__image-wrap').prepend(img);
+        case 'pictures':
+          State.pictures[this.quizNum - 1].questions[this.questionIndex].isCorrectAnswered = false;
+
+          break;
+
+        default:
+      }
+
+      renderPopUp(new AfterAnswerPopUp(this.categoryName, this.quizNum, this.question, 'wrong'));
+    }
   }
 
-  getAuthors() {
-    const authorsSet = new Set();
+  renderImage() {
+    const url = generateImageURL(this.question.imageNum);
 
-    authorsSet.add(this.question.author);
+    const img = new Img(url, 'image');
 
-    while (authorsSet.size < 4) {
-      authorsSet.add(State.authors[getRandomNum(0, 239)]);
+    this.element.querySelector('.loading').remove();
+
+    img.render(this.element.querySelector('.question__image-wrap'));
+  }
+
+  generateAnswers() {
+    const answersSet = new Set();
+
+    answersSet.add(this.categoryName === 'artists' ? this.question.author : this.question.imageNum);
+
+    while (answersSet.size < 4) {
+      const randomNum = getRandomNum(0, 239);
+
+      if (this.categoryName === 'artists') {
+        answersSet.add(State.authors[randomNum]);
+      } else if (
+        this.categoryName === 'pictures' &&
+        State.fullData[randomNum].author !== this.question.author
+      ) {
+        answersSet.add(randomNum);
+      }
     }
 
-    return shuffle(Array.from(authorsSet));
+    return shuffle(Array.from(answersSet));
   }
 
-  getImagesNums() {
-    const imagesNumsSet = new Set();
+  showAfterAnswerPopUp(answerElement, result) {
+    answerElement.classList.add(`${result}`);
 
-    imagesNumsSet.add(this.question.imageNum);
-
-    while (imagesNumsSet.size < 4) {
-      const imageNum = getRandomNum(0, 239);
-
-      if (State.fullData[imageNum].author !== this.question.author) imagesNumsSet.add(imageNum);
-    }
-
-    return shuffle(Array.from(imagesNumsSet));
-  }
-
-  handleCorrectAnswer(answerElement) {
-    answerElement.classList.add('correct');
-    const audio = new Audio('./assets/audio/correct.mp3');
-
-    audio.volume = Number(State.settings.audioVolume);
-    audio.play();
+    playAudio(`./assets/audio/${result}.mp3`);
 
     setTimeout(() => {
-      new QuestionAnswerPopUp(this.categoryName, this.quizNum, this.question, 'correct').render();
-    }, 600);
-  }
-
-  handleWrongAnswer(answerElement) {
-    answerElement.classList.add('wrong');
-    const audio = new Audio('./assets/audio/wrong.mp3');
-    audio.volume = Number(State.settings.audioVolume);
-    audio.play();
-
-    setTimeout(() => {
-      new QuestionAnswerPopUp(this.categoryName, this.quizNum, this.question, 'wrong').render();
+      renderPopUp(
+        new AfterAnswerPopUp(this.categoryName, this.quizNum, this.question, `${result}`)
+      );
     }, 600);
   }
 
@@ -144,11 +122,11 @@ class QuestionView extends BaseComponent {
         if (answer.element.textContent === this.question.author) {
           State.artists[this.quizNum - 1].questions[this.questionIndex].isCorrectAnswered = true;
 
-          this.handleCorrectAnswer(answer.element);
+          this.showAfterAnswerPopUp(answer.element, 'correct');
         } else {
           State.artists[this.quizNum - 1].questions[this.questionIndex].isCorrectAnswered = false;
 
-          this.handleWrongAnswer(answer.element);
+          this.showAfterAnswerPopUp(answer.element, 'wrong');
         }
         break;
 
@@ -156,11 +134,11 @@ class QuestionView extends BaseComponent {
         if (answer.answerData === this.question.imageNum) {
           State.pictures[this.quizNum - 1].questions[this.questionIndex].isCorrectAnswered = true;
 
-          this.handleCorrectAnswer(answer.element);
+          this.showAfterAnswerPopUp(answer.element, 'correct');
         } else {
           State.pictures[this.quizNum - 1].questions[this.questionIndex].isCorrectAnswered = false;
 
-          this.handleWrongAnswer(answer.element);
+          this.showAfterAnswerPopUp(answer.element, 'wrong');
         }
         break;
 
@@ -168,9 +146,9 @@ class QuestionView extends BaseComponent {
     }
   }
 
-  generateAnswers() {
+  generateAnswerButtons() {
     for (let i = 0; i < this.answers.length; i += 1) {
-      const answer = new QiuzAnswerBtn(this.categoryName, this.answers[i]);
+      const answer = new AnswerBtn(this.categoryName, this.answers[i]);
 
       answer.appendInto(this.element.querySelector('.question__answers-container'));
 

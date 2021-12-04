@@ -1,4 +1,6 @@
 import BaseComponent from '../../components/base-component';
+import Btn from '../../components/button/button';
+import BtnLink from '../../components/button/button-link/button-link';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import State from '../../state/state';
@@ -8,42 +10,29 @@ class SettingsView extends BaseComponent {
     super('div', ['view', 'settings__view']);
 
     this.header = new Header();
-    this.prevViewBtn = new BaseComponent('button', ['prev-view-btn']);
-    this.prevViewBtn.element.setAttribute('type', 'button');
-    this.prevViewBtn.element.innerHTML = `<a href="${sessionStorage.getItem(
-      'art-quiz-app-last-hash'
-    )}"></a>`;
 
-    this.viewNameTitle = new BaseComponent('div', ['view-name']);
-    this.viewNameTitle.element.innerHTML = 'Настройки';
+    this.prevViewBtn = new Btn(['icon-btn', 'prev-view-btn']);
+    this.prevViewBtnLink = new BtnLink(sessionStorage.getItem('art-quiz-app-last-hash'));
 
-    this.volumeOffBtn = new BaseComponent('button', ['volume-btn', 'off-btn']);
-    this.volumeOffBtn.element.setAttribute('type', 'button');
+    this.viewTitle = new BaseComponent('div', ['view-name']);
+    this.viewTitle.element.textContent = 'Настройки';
 
-    this.volumeOnBtn = new BaseComponent('button', ['volume-btn', 'on-btn']);
-    this.volumeOnBtn.element.setAttribute('type', 'button');
+    this.volumeOffBtn = new Btn(['icon-btn', 'volume-btn', 'off']);
+    this.volumeOnBtn = new Btn(['icon-btn', 'volume-btn', 'on']);
 
     this.timeGameTogleBtn = new BaseComponent('input');
     this.timeGameTogleBtn.element.setAttribute('type', 'checkbox');
     this.timeGameTogleBtn.element.id = 'input-checkbox';
     if (State.settings.timeGame) this.timeGameTogleBtn.element.checked = true;
 
-    this.minusBtn = new BaseComponent('button', ['time-duration__btn', 'minus-btn']);
-    this.minusBtn.element.setAttribute('type', 'button');
-
-    this.plusBtn = new BaseComponent('button', ['time-duration__btn', 'plus-btn']);
-    this.plusBtn.element.setAttribute('type', 'button');
+    this.decreaseTimeToAnswerBtn = new Btn(['icon-btn', 'change-value-btn', 'decrease']);
+    this.increaseTimeToAnswerBtn = new Btn(['icon-btn', 'change-value-btn', 'increase']);
 
     this.timeOutput = new BaseComponent('span', ['output']);
     this.timeOutput.element.textContent = `${State.settings.timeToAnswer}`;
 
-    this.setToDefaultBtn = new BaseComponent('button', ['btn']);
-    this.setToDefaultBtn.element.setAttribute('type', 'button');
-    this.setToDefaultBtn.element.textContent = 'Сбросить';
-
-    this.saveBtn = new BaseComponent('button', ['btn', 'btn_colored']);
-    this.saveBtn.element.setAttribute('type', 'button');
-    this.saveBtn.element.textContent = 'Сохранить';
+    this.setToDefaultBtn = new Btn(['btn', 'light'], 'Сбросить');
+    this.saveBtn = new Btn(['btn', 'colored'], 'Сохранить');
 
     this.footer = new Footer();
 
@@ -64,10 +53,8 @@ class SettingsView extends BaseComponent {
             <div class="time-game">
               <h3 class="setting__title">Игра на время</h3>
               <div class="time-game__controls">
-
                 <div class="toggle">
                   <label for="input-checkbox" class="toggle-switch">
-
                     <span class="slider off-mode">
                   </label>
                 </div>
@@ -76,14 +63,10 @@ class SettingsView extends BaseComponent {
             <div class="time-duration">
               <h3 class="setting__title">Время на ответ</h3>
               <div class="time-duration__controls">
-
-
-
              </div>
             </div>
           </div>
           <div class="buttons-container">
-
           </div>
         </div>
       </main>
@@ -91,48 +74,32 @@ class SettingsView extends BaseComponent {
 
     this.header.prependInto(this.element);
     this.prevViewBtn.prependInto(this.header.element.querySelector('.container'));
-    this.viewNameTitle.appendInto(this.header.element.querySelector('.container'));
+    this.prevViewBtnLink.prependInto(this.prevViewBtn.element);
+    this.viewTitle.appendInto(this.header.element.querySelector('.container'));
     this.volumeOffBtn.prependInto(this.element.querySelector('.volume__controls'));
     this.volumeOnBtn.appendInto(this.element.querySelector('.volume__controls'));
     this.timeGameTogleBtn.prependInto(this.element.querySelector('.toggle-switch'));
-    this.minusBtn.prependInto(this.element.querySelector('.time-duration__controls'));
+    this.decreaseTimeToAnswerBtn.prependInto(
+      this.element.querySelector('.time-duration__controls')
+    );
     this.timeOutput.appendInto(this.element.querySelector('.time-duration__controls'));
-    this.plusBtn.appendInto(this.element.querySelector('.time-duration__controls'));
+    this.increaseTimeToAnswerBtn.appendInto(this.element.querySelector('.time-duration__controls'));
     this.setToDefaultBtn.prependInto(this.element.querySelector('.buttons-container'));
     this.saveBtn.appendInto(this.element.querySelector('.buttons-container'));
     this.footer.appendInto(this.element);
 
     this.element.querySelector('.volume').style.width = `${State.settings.audioVolume * 100}%`;
 
-    this.minusBtn.element.addEventListener('click', () => {
-      if (this.timeOutput.element.textContent > 5) {
-        this.timeOutput.element.textContent -= 5;
-      }
-    });
+    this.decreaseTimeToAnswerBtn.element.addEventListener('click', () =>
+      this.decreaseTimeToAnswer()
+    );
 
-    this.plusBtn.element.addEventListener('click', () => {
-      if (this.timeOutput.element.textContent < 30) {
-        this.timeOutput.element.textContent = Number(this.timeOutput.element.textContent) + 5;
-      }
-    });
+    this.increaseTimeToAnswerBtn.element.addEventListener('click', () =>
+      this.increaseTimeToAnswer()
+    );
 
-    this.setToDefaultBtn.element.addEventListener('click', () => {
-      this.timeOutput.element.textContent = 20;
-      State.settings.timeToAnswer = 20;
-      this.element.querySelector('.volume-input').value = 50;
-      this.element.querySelector('.volume').style.width = `50%`;
-      State.settings.audioVolume = 0.5;
-      this.timeGameTogleBtn.element.checked = false;
-      State.settings.timeGame = false;
-    });
-
-    this.saveBtn.element.addEventListener('click', () => {
-      State.settings.timeToAnswer = this.timeOutput.element.textContent;
-      State.settings.audioVolume = this.element.querySelector('.volume-input').value / 100;
-      if (this.timeGameTogleBtn.element.checked) {
-        State.settings.timeGame = true;
-      } else State.settings.timeGame = false;
-    });
+    this.setToDefaultBtn.element.addEventListener('click', () => this.setSettingsToDefault());
+    this.saveBtn.element.addEventListener('click', () => this.saveSettings());
 
     this.element.querySelector('.volume-input').addEventListener('input', (event) => {
       this.element.querySelector('.volume').style.width = `${event.target.value}%`;
@@ -149,9 +116,38 @@ class SettingsView extends BaseComponent {
     });
   }
 
-  render() {
-    document.querySelector('#root').innerHTML = '';
-    this.appendInto(document.querySelector('#root'));
+  decreaseTimeToAnswer() {
+    if (this.timeOutput.element.textContent > 5) {
+      this.timeOutput.element.textContent -= 5;
+    }
+  }
+
+  increaseTimeToAnswer() {
+    if (this.timeOutput.element.textContent < 30) {
+      this.timeOutput.element.textContent = Number(this.timeOutput.element.textContent) + 5;
+    }
+  }
+
+  setSettingsToDefault() {
+    this.timeOutput.element.textContent = 20;
+    State.settings.timeToAnswer = 20;
+
+    this.element.querySelector('.volume-input').value = 50;
+    this.element.querySelector('.volume').style.width = `50%`;
+    State.settings.audioVolume = 0.5;
+
+    this.timeGameTogleBtn.element.checked = false;
+    State.settings.timeGame = false;
+  }
+
+  saveSettings() {
+    State.settings.timeToAnswer = this.timeOutput.element.textContent;
+
+    State.settings.audioVolume = this.element.querySelector('.volume-input').value / 100;
+
+    if (this.timeGameTogleBtn.element.checked) {
+      State.settings.timeGame = true;
+    } else State.settings.timeGame = false;
   }
 }
 

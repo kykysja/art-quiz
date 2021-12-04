@@ -1,0 +1,113 @@
+.btn {
+  padding: 14px 8px 16px;
+  @include font(24px, 24px, 500, -0.4px);
+  text-transform: capitalize;
+  text-align: center;
+  color: $color-font-dark;
+  border: 1px solid $color-font-dark;
+  border-radius: 56px;
+  transition: all 0.4s cubic-bezier(0.2, 0, 0, 0.8);
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.btn.light {
+  color: $color-font-base;
+  border: 1px solid $color-font-base;
+}
+
+.btn.colored {
+  background-color: $color-prim;
+  border: none;
+}
+
+.icon-btn {
+  background-size: 100% 100%;
+  transition: all 0.4s cubic-bezier(0.2, 0, 0, 0.8);
+
+  &:hover {
+    transform: rotate(360deg) scale(1.1);
+  }
+}
+
+.btn__link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.img-btn {
+  border-radius: 18px;
+  border: 1.8px solid $color-prim-add;
+
+  .img {
+    width: 100%;
+    border-radius: 18px;
+  }
+}
+
+.settings-btn {
+  width: 34px;
+  height: 34px;
+  background-image: url('./assets/svg/settings-btn.svg');
+}
+
+.score-btn {
+  width: 28px;
+  height: 28px;
+  background-image: url('./assets/svg/score-btn.svg');
+}
+
+.exit-btn {
+  width: 15px;
+  height: 15px;
+  background-image: url('./assets/svg/exit-btn.svg');
+}
+
+.exit-btn_dark {
+  background-image: url('./assets/svg/exit-btn-dark.svg');
+}
+
+.prev-view-btn {
+  width: 22px;
+  height: 40px;
+  background-image: url('./assets/svg/prev-view-btn.svg');
+  background-repeat: no-repeat;
+  background-size: 50% 50% !important;
+  background-position: center center;
+
+  &:hover {
+    transform: none !important;
+  }
+}
+
+.volume-btn {
+  height: 16px;
+  background-size: 100% 100%;
+}
+
+.volume-btn.off {
+  width: 23px;
+  background-image: url('./assets/svg/volume-off-icon.svg');
+}
+
+.volume-btn.on {
+  width: 16px;
+  background-image: url('./assets/svg/volume-on-icon.svg');
+}
+
+.change-value-btn {
+  width: 33px;
+  height: 33px;
+  background-size: 100% 100%;
+}
+
+.change-value-btn.decrease {
+  background-image: url('./assets/svg/minus-icon.svg');
+}
+
+.change-value-btn.increase {
+  background-image: url('./assets/svg/plus-icon.svg');
+}
