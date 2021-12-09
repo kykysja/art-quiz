@@ -10,14 +10,14 @@ class PictureInfoPopUp extends BaseComponent {
     this.question = question;
 
     this.pictureInfo = new PictureInfo(this.question);
-    this.closeBtn = new Btn(['btn', 'btn_colored'], 'Закрыть');
+    this.closeBtn = new Btn(['btn', '_colored'], 'Закрыть');
 
     this.element.innerHTML = `
-      <div class="pop-up-view question-data__pop-up"></div>
+      <div class="pop-up-view picture-info__pop-up"></div>
     `;
 
-    this.pictureInfo.prependInto(this.element.querySelector('.question-data__pop-up'));
-    this.closeBtn.appendInto(this.element.querySelector('.question-data__pop-up'));
+    this.pictureInfo.prependInto(this.element.querySelector('.picture-info__pop-up'));
+    this.closeBtn.appendInto(this.element.querySelector('.picture-info__pop-up'));
 
     this.closeBtn.element.addEventListener('click', closePopUp);
   }

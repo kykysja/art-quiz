@@ -18,19 +18,19 @@ class AfterAnswerPopUp extends BaseComponent {
     this.questionsContainer = document.querySelector('.quiz__view .questions-container');
 
     this.pictureInfo = new PictureInfo(this.question);
-    this.nextQuestionBtn = new Btn(['btn', 'btn_colored'], 'Продолжить');
+    this.nextQuestionBtn = new Btn(['btn', '_colored'], 'Продолжить');
     this.answerResultIndicator = new BaseComponent('div', [
       'answer-icon',
       `${this.result}__answer-icon`,
     ]);
 
     this.element.innerHTML = `
-      <div class="pop-up-view question-answer__pop-up"></div>
+      <div class="pop-up-view after-answer__pop-up"></div>
     `;
 
-    this.pictureInfo.prependInto(this.element.querySelector('.question-answer__pop-up'));
+    this.pictureInfo.prependInto(this.element.querySelector('.after-answer__pop-up'));
     this.answerResultIndicator.appendInto(this.pictureInfo.element.querySelector('.image-wrap'));
-    this.nextQuestionBtn.appendInto(this.element.querySelector('.question-answer__pop-up'));
+    this.nextQuestionBtn.appendInto(this.element.querySelector('.after-answer__pop-up'));
 
     this.nextQuestionBtn.element.addEventListener(
       'click',

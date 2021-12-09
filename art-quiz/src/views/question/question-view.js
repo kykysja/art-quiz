@@ -2,11 +2,11 @@ import BaseComponent from '../../components/base-component';
 import AfterAnswerPopUp from './after-answer-pop-up/after-answer-pop-up';
 import AnswerBtn from './answer-btn/answer-btn';
 import State from '../../state/state';
-import { generateImageURL, getRandomNum, shuffle } from '../../helpers/helpers';
 import timer from '../../shared/timer/timer';
-import { renderPopUp } from '../../shared/pop-up/pop-up';
 import playAudio from '../../shared/audio/audio';
 import Img from '../../components/img/img';
+import { generateImageURL, getRandomNum, shuffle } from '../../helpers/helpers';
+import { renderPopUp } from '../../shared/pop-up/pop-up';
 
 class QuestionView extends BaseComponent {
   constructor(categoryName, quizNum, question, questionIndex) {
@@ -71,14 +71,14 @@ class QuestionView extends BaseComponent {
     }
   }
 
-  renderImage() {
+  async renderImage() {
     const url = generateImageURL(this.question.imageNum);
 
     const img = new Img(url, 'image');
 
-    this.element.querySelector('.loading').remove();
+    await img.render(this.element.querySelector('.question__image-wrap'));
 
-    img.render(this.element.querySelector('.question__image-wrap'));
+    this.element.querySelector('.loading').remove();
   }
 
   generateAnswers() {
@@ -116,6 +116,11 @@ class QuestionView extends BaseComponent {
 
   handleAnswerBtnClick(answer) {
     timer.stop();
+
+    this.element
+      .querySelector('.question__answers-container')
+      .querySelectorAll('.question__answer-btn')
+      .forEach((btn) => btn.setAttribute('disabled', 'disabled'));
 
     switch (this.categoryName) {
       case 'artists':

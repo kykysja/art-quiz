@@ -1,24 +1,25 @@
 .btn {
-  padding: 14px 8px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 50px;
+  border-radius: 56px;
+  border: 1px solid $color-font-dark;
+
   @include font(24px, 24px, 500, -0.4px);
   text-transform: capitalize;
-  text-align: center;
   color: $color-font-dark;
-  border: 1px solid $color-font-dark;
-  border-radius: 56px;
-  transition: all 0.4s cubic-bezier(0.2, 0, 0, 0.8);
 
-  &:hover {
-    transform: scale(1.1);
-  }
+  transition: all 0.4s cubic-bezier(0.2, 0, 0, 0.8);
 }
 
-.btn.light {
+.btn._light {
   color: $color-font-base;
   border: 1px solid $color-font-base;
 }
 
-.btn.colored {
+.btn._colored {
   background-color: $color-prim;
   border: none;
 }
@@ -32,18 +33,15 @@
   }
 }
 
-.btn__link {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
 .img-btn {
+  display: block;
   border-radius: 18px;
-  border: 1.8px solid $color-prim-add;
+  border: 2px solid $color-prim-add;
 
   .img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 18px;
   }
 }
@@ -70,30 +68,34 @@
   background-image: url('./assets/svg/exit-btn-dark.svg');
 }
 
-.prev-view-btn {
+.prev-page-btn {
   width: 22px;
   height: 40px;
   background-image: url('./assets/svg/prev-view-btn.svg');
   background-repeat: no-repeat;
-  background-size: 50% 50% !important;
+  background-size: 50% 50%;
   background-position: center center;
 
   &:hover {
-    transform: none !important;
+    transform: none;
   }
 }
 
 .volume-btn {
   height: 16px;
   background-size: 100% 100%;
+
+  &:hover {
+    transform: none;
+  }
 }
 
-.volume-btn.off {
+.volume-btn._off {
   width: 23px;
   background-image: url('./assets/svg/volume-off-icon.svg');
 }
 
-.volume-btn.on {
+.volume-btn._on {
   width: 16px;
   background-image: url('./assets/svg/volume-on-icon.svg');
 }
@@ -102,12 +104,16 @@
   width: 33px;
   height: 33px;
   background-size: 100% 100%;
+
+  &:hover {
+    transform: none;
+  }
 }
 
-.change-value-btn.decrease {
+.change-value-btn._decrease {
   background-image: url('./assets/svg/minus-icon.svg');
 }
 
-.change-value-btn.increase {
+.change-value-btn._increase {
   background-image: url('./assets/svg/plus-icon.svg');
 }

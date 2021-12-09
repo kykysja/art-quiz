@@ -5,6 +5,7 @@ class Img extends BaseComponent {
     super('img', ['img']);
 
     this.element.setAttribute('alt', alt);
+
     this.url = url;
   }
 

@@ -8,22 +8,13 @@
     @include media-mobile-large {
       @include font(16px, 16px, 400, -0.63px);
     }
-
-    .rss-logo {
-    }
   }
 }
 
 .footer__author {
-  .author__link {
-  }
-
   @include media-mobile-large {
     flex-grow: 1;
     text-align: right;
     padding-right: 30px;
   }
-}
-
-.footer__date {
 }

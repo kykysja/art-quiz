@@ -1,6 +1,6 @@
 .category__view {
   @include media-desktop {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
   }
@@ -26,9 +26,6 @@
     .logo__text:first-child {
       color: $color-prim;
     }
-  }
-
-  .settings-btn-wrap {
   }
 
   .main {
@@ -66,7 +63,5 @@
 
   .footer {
     margin-top: 50px;
-    .container {
-    }
   }
 }

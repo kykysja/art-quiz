@@ -1,7 +1,6 @@
 import State from '../../../state/state';
 import BaseComponent from '../../../components/base-component';
-import Btn from '../../../components/button/button';
-import BtnLink from '../../../components/button/button-link/button-link';
+import BtnLink from '../../../components/button-link/button-link';
 
 class EndQuizPopUp extends BaseComponent {
   constructor(categoryName, quizNum, numberOfCorrectAnswers) {
@@ -32,14 +31,13 @@ class EndQuizPopUp extends BaseComponent {
       this.playBtnHref = `#${this.categoryName}/quiz/${this.quizNum + 1}`;
     }
 
-    this.closeBtn = new Btn(['icon-btn', 'exit-btn', 'exit-btn_dark']);
-    this.closeBtnLink = new BtnLink(`#${this.categoryName}`);
-
-    this.homeBtn = new Btn(['btn', 'btn_dark']);
-    this.homeBtnLink = new BtnLink('#', 'Главная');
-
-    this.playBtn = new Btn(['btn', 'btn_colored']);
-    this.playBtnLink = new BtnLink(`${this.playBtnHref}`, `${this.playBtnText}`);
+    this.closeBtn = new BtnLink(`#${this.categoryName}`, ['icon-btn', 'exit-btn', 'exit-btn_dark']);
+    this.homeBtn = new BtnLink('#', ['btn', 'btn_dark'], 'Главная');
+    this.playBtn = new BtnLink(
+      `${this.playBtnHref}`,
+      ['btn', 'btn_colored'],
+      `${this.playBtnText}`
+    );
 
     this.element.innerHTML = `
       <div class="pop-up-view end-quiz__pop-up">
@@ -55,18 +53,16 @@ class EndQuizPopUp extends BaseComponent {
     `;
 
     this.closeBtn.prependInto(this.element.querySelector('.pop-up-wrap'));
-    this.closeBtnLink.prependInto(this.closeBtn.element);
     this.homeBtn.appendInto(this.element.querySelector('.buttons-container'));
-    this.homeBtnLink.prependInto(this.homeBtn.element);
 
     if (this.quizNum < this.numberOFQuizzes) {
       this.playBtn.appendInto(this.element.querySelector('.buttons-container'));
-      this.playBtnLink.prependInto(this.playBtn.element);
     } else {
       this.element.querySelector('.buttons-container').classList.add('centered');
     }
 
     // ? how to do more correctly ?
+
     if (numberOfCorrectAnswers < 5)
       this.playBtn.element.addEventListener('click', () => {
         window.location.hash = `${this.categoryName}`;

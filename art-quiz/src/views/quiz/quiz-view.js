@@ -11,10 +11,10 @@ class QuizView extends BaseComponent {
   constructor(categoryName, quiz) {
     super('div', ['view', 'quiz__view']);
 
-    this.updateState();
-
     this.categoryName = categoryName;
     this.quiz = quiz;
+
+    this.updateState();
 
     this.exitQuizBtn = new Btn(['icon-btn', 'exit-btn']);
     this.footer = new Footer();

@@ -32,9 +32,6 @@
     }
   }
 
-  .settings-btn-wrap {
-  }
-
   .main {
     @include media-desktop {
       flex-grow: 1;
@@ -72,7 +69,6 @@
     }
 
     .card-item:hover {
-      // transform: scale(1.05);
       border: none;
       box-shadow: 1px 1px #53ea93, 2px 2px #53ea93, 3px 3px #53ea93, 4px 4px #53ea93,
         5px 5px #53ea93, 6px 6px #53ea93, 7px 7px #53ea93;
@@ -83,7 +79,5 @@
 
   .footer {
     margin-top: 50px;
-    .container {
-    }
   }
 }

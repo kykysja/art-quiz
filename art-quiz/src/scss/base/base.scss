@@ -10,6 +10,9 @@ body {
 
 .view {
   width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+
   padding: 22px 16px 10px;
   background-color: $color-bg-dark;
 
@@ -31,7 +34,7 @@ body {
 
   @include media-tablet-small {
     row-gap: 25px;
-    column-gap: 20px;
+    column-gap: 19px;
   }
 
   @include media-desktop {
@@ -42,24 +45,24 @@ body {
     width: calc((100% - 18px) / 2);
 
     @include media-tablet-small {
-      width: calc((100% - 40px) / 3);
+      width: calc((100% - 38px) / 3);
     }
 
     @include media-desktop {
       width: calc((100% - 100px) / 6);
     }
 
-    .img-btn {
-      display: block;
+    .card__image {
+      width: 100%;
 
-      @include adaptiveProperty(height, 320, 519, 135, 235);
+      @include adaptiveProperty(height, 320, 519, 135, 234.5);
 
       @include media-tablet-small {
-        @include adaptiveProperty(height, 520, 1023, 146, 313);
+        @include adaptiveProperty(height, 520, 1023, 150, 317.7);
       }
 
       @include media-desktop {
-        @include adaptiveProperty(height, 1024, 1920, 128, 261);
+        @include adaptiveProperty(height, 1024, 1920, 132, 265);
       }
     }
 
@@ -67,23 +70,25 @@ body {
       filter: grayscale(100%);
     }
 
-    .img.passed {
+    .img._passed {
       filter: grayscale(0%);
     }
   }
 }
 
 .loading {
-  // width: 100%;
   height: 100%;
-  @include font(20px, 20px, 500);
-  color: $color-prim;
   padding-top: 10px;
   padding-left: 10px;
+  text-align: left;
+
+  @include font(20px, 20px, 500);
+  color: $color-prim;
 
   @include media-mobile-large {
-    @include font(24px, 24px, 500);
     padding-top: 20px;
     padding-left: 20px;
+
+    @include font(24px, 24px, 500);
   }
 }

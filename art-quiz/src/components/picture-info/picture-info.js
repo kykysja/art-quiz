@@ -4,17 +4,15 @@ import Img from '../img/img';
 
 class PictureInfo extends BaseComponent {
   constructor(question) {
-    super('div', ['question-data']);
+    super('div', ['picture-info']);
 
     this.question = question;
     this.imgUrl = generateImageURL(this.question.imageNum);
     this.imgAlt = this.question.imageNum;
 
     this.element.innerHTML = `
-      <div class="image-wrap img-btn">
-        <div class="loading">
-          <div class="loading">Load ...</div>
-        </div>
+      <div class="image-wrap">
+        <div class="loading">Load ...</div>
       </div>
       <div class="picture-name">${this.question.name}</div>
       <div class="description">
@@ -29,9 +27,9 @@ class PictureInfo extends BaseComponent {
   async renderImage() {
     const img = new Img(this.imgUrl, this.imgAlt);
 
-    this.element.querySelector('.loading').remove();
+    await img.render(this.element.querySelector('.image-wrap'));
 
-    img.render(this.element.querySelector('.image-wrap'));
+    this.element.querySelector('.loading').remove();
   }
 }
 

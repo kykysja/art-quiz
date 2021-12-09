@@ -1,6 +1,5 @@
 import BaseComponent from '../../components/base-component';
-import Btn from '../../components/button/button';
-import BtnLink from '../../components/button/button-link/button-link';
+import BtnLink from '../../components/button-link/button-link';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import Logo from '../../components/logo/logo';
@@ -16,8 +15,7 @@ class CategoryView extends BaseComponent {
     this.categoryName = categoryName;
 
     this.header = new Header();
-    this.settingsBtn = new Btn(['icon-btn', 'settings-btn']);
-    this.settingsBtnLink = new BtnLink('#settings');
+    this.settingsBtn = new BtnLink('#settings', ['icon-btn', 'settings-btn']);
     this.logo = new Logo();
     this.quizzesCardsContainer = new BaseComponent('div', ['cards-container']);
     this.footer = new Footer();
@@ -33,7 +31,6 @@ class CategoryView extends BaseComponent {
     this.header.prependInto(this.element);
     this.logo.prependInto(this.header.element.querySelector('.container'));
     this.settingsBtn.appendInto(this.header.element.querySelector('.container'));
-    this.settingsBtnLink.prependInto(this.settingsBtn.element);
     this.quizzesCardsContainer.appendInto(this.element.querySelector('.main .container'));
     this.footer.appendInto(this.element);
 

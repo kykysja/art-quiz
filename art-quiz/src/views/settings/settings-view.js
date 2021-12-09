@@ -1,6 +1,6 @@
 import BaseComponent from '../../components/base-component';
 import Btn from '../../components/button/button';
-import BtnLink from '../../components/button/button-link/button-link';
+import BtnLink from '../../components/button-link/button-link';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import State from '../../state/state';
@@ -10,30 +10,32 @@ class SettingsView extends BaseComponent {
     super('div', ['view', 'settings__view']);
 
     this.header = new Header();
-
-    this.prevViewBtn = new Btn(['icon-btn', 'prev-view-btn']);
-    this.prevViewBtnLink = new BtnLink(sessionStorage.getItem('art-quiz-app-last-hash'));
-
     this.viewTitle = new BaseComponent('div', ['view-name']);
     this.viewTitle.element.textContent = 'Настройки';
+    this.prevPageBtn = new BtnLink(sessionStorage.getItem('art-quiz-app-last-hash'), [
+      'icon-btn',
+      'prev-page-btn',
+    ]);
 
-    this.volumeOffBtn = new Btn(['icon-btn', 'volume-btn', 'off']);
-    this.volumeOnBtn = new Btn(['icon-btn', 'volume-btn', 'on']);
+    this.volumeOffBtn = new Btn(['icon-btn', 'volume-btn', '_off']);
+    this.volumeOnBtn = new Btn(['icon-btn', 'volume-btn', '_on']);
 
     this.timeGameTogleBtn = new BaseComponent('input');
     this.timeGameTogleBtn.element.setAttribute('type', 'checkbox');
     this.timeGameTogleBtn.element.id = 'input-checkbox';
     if (State.settings.timeGame) this.timeGameTogleBtn.element.checked = true;
 
-    this.decreaseTimeToAnswerBtn = new Btn(['icon-btn', 'change-value-btn', 'decrease']);
-    this.increaseTimeToAnswerBtn = new Btn(['icon-btn', 'change-value-btn', 'increase']);
-
+    this.decreaseTimeToAnswerBtn = new Btn(['icon-btn', 'change-value-btn', '_decrease']);
+    this.increaseTimeToAnswerBtn = new Btn(['icon-btn', 'change-value-btn', '_increase']);
     this.timeOutput = new BaseComponent('span', ['output']);
     this.timeOutput.element.textContent = `${State.settings.timeToAnswer}`;
 
-    this.setToDefaultBtn = new Btn(['btn', 'light'], 'Сбросить');
-    this.saveBtn = new Btn(['btn', 'colored'], 'Сохранить');
-
+    this.setToDefaultBtn = new Btn(['btn', '_light'], 'Сбросить');
+    this.saveBtn = new BtnLink(
+      sessionStorage.getItem('art-quiz-app-last-hash'),
+      ['btn', '_colored'],
+      'Сохранить'
+    );
     this.footer = new Footer();
 
     this.element.innerHTML = `
@@ -73,8 +75,7 @@ class SettingsView extends BaseComponent {
     `;
 
     this.header.prependInto(this.element);
-    this.prevViewBtn.prependInto(this.header.element.querySelector('.container'));
-    this.prevViewBtnLink.prependInto(this.prevViewBtn.element);
+    this.prevPageBtn.prependInto(this.header.element.querySelector('.container'));
     this.viewTitle.appendInto(this.header.element.querySelector('.container'));
     this.volumeOffBtn.prependInto(this.element.querySelector('.volume__controls'));
     this.volumeOnBtn.appendInto(this.element.querySelector('.volume__controls'));
@@ -152,5 +153,3 @@ class SettingsView extends BaseComponent {
 }
 
 export default SettingsView;
-
-// <span class="text">Выкл.</span>

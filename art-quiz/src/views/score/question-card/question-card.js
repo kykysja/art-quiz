@@ -21,12 +21,12 @@ class QuestionCard extends BaseComponent {
     this.element.addEventListener('click', () => renderPopUp(new PictureInfoPopUp(this.question)));
   }
 
-  renderImage() {
+  async renderImage() {
     const img = new Img(this.imgUrl, this.imgAlt);
 
-    this.element.querySelector('.loading').remove();
+    await img.render(this.element);
 
-    img.render(this.element);
+    this.element.querySelector('.loading').remove();
   }
 }
 

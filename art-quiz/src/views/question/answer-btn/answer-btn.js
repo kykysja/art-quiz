@@ -4,17 +4,17 @@ import { generateImageURL } from '../../../helpers/helpers';
 
 class QuestionAnswerBtn extends BaseComponent {
   constructor(categoryName, answer) {
-    const classes = categoryName === 'artists' ? ['btn', 'btn_light'] : ['img-btn'];
+    const classes = categoryName === 'artists' ? ['btn', '_light'] : ['img-btn'];
 
     super('button', ['question__answer-btn', ...classes]);
 
     this.element.setAttribute('type', 'button');
 
     this.categoryName = categoryName;
-    this.answer = answer;
+    this.answerData = answer;
 
     if (this.categoryName === 'artists') {
-      this.element.innerHTML = `${this.answer}`;
+      this.element.innerHTML = `${this.answerData}`;
     } else {
       this.element.innerHTML = '<div class="loading">Load ...</div>';
 
@@ -23,13 +23,13 @@ class QuestionAnswerBtn extends BaseComponent {
   }
 
   async renderImage() {
-    const url = generateImageURL(this.answer);
+    const url = generateImageURL(this.answerData);
 
-    const img = new Img(url, this.answer);
+    const img = new Img(url, this.answerData);
+
+    await img.render(this.element);
 
     this.element.querySelector('.loading').remove();
-
-    img.render(this.element);
   }
 }
 

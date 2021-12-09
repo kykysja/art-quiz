@@ -1,20 +1,22 @@
-.image-wrap {
-  position: relative;
+.picture-info {
+  .image-wrap {
+    border-radius: 18px;
 
-  .img {
+    .img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 18px;
+    }
   }
-}
-.picture-name {
-  margin-top: 30px;
-  @include font(24px, 24px, 500, normal);
-}
 
-.description {
-  margin-top: 10px;
-  font-style: italic;
-}
+  .picture-name {
+    margin-top: 30px;
+    @include font(24px, 24px, 500, normal);
+  }
 
-.author {
-}
-.year {
+  .description {
+    margin-top: 10px;
+    font-style: italic;
+  }
 }

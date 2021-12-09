@@ -8,6 +8,7 @@
     .container {
       height: 100%;
       position: relative;
+      align-items: center;
     }
   }
 
@@ -48,9 +49,6 @@
     @include font(30px, 30px, 700, -0.91px);
   }
 
-  .volume-input {
-  }
-
   .volume__controls {
     margin-top: 12px;
     width: 100%;
@@ -62,8 +60,6 @@
     margin-top: 40px;
   }
 
-  .time-game {
-  }
   .time-game__controls {
     margin-top: 20px;
     display: flex;
@@ -71,14 +67,7 @@
     align-items: center;
     column-gap: 20px;
   }
-  .text {
-  }
-  .toggle {
-  }
-  .toggle-switch {
-  }
-  .timer-off-mode {
-  }
+
   .time-duration {
     margin-top: 50px;
   }
@@ -91,6 +80,9 @@
     column-gap: 25px;
 
     .output {
+      display: block;
+      width: 27px;
+      text-align: center;
       @include font(24px, 28px, 500, -0.5px);
     }
   }
@@ -112,15 +104,10 @@
     width: calc((100% - 10px) / 2);
     padding: 7px 6px;
     height: 48px;
-    // @include font(16px, 16px, 500, -0.91px);
-  }
-  .btn_colored {
   }
 
   .footer {
     margin-top: 40px;
-    .container {
-    }
   }
 }
 
@@ -147,7 +134,7 @@
   right: 0;
   bottom: 0;
   transition: 0.7s;
-  background: $color-prim;
+  background: $color-font-base;
 }
 
 .slider:before {
@@ -158,11 +145,16 @@
   border-radius: 50%;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: rgb(187, 187, 187);
   transition: 0.4s;
 }
 
+input:checked + .slider {
+  background: $color-prim;
+}
+
 input:checked + .slider:before {
+  background: $color-font-base;
   transform: translateX(24px);
 }
 
