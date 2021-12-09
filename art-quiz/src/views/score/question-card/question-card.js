@@ -24,6 +24,8 @@ class QuestionCard extends BaseComponent {
   async renderImage() {
     const img = new Img(this.imgUrl, this.imgAlt);
 
+    if (this.question.isCorrectAnswered) img.element.classList.add('_passed');
+
     await img.render(this.element);
 
     this.element.querySelector('.loading').remove();
