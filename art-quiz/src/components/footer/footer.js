@@ -1,8 +1,9 @@
+import { FOOTER } from '../../consts/tags';
 import BaseComponent from '../base-component';
 
 class Footer extends BaseComponent {
   constructor() {
-    super('footer', ['footer']);
+    super(FOOTER, ['footer']);
 
     this.element.innerHTML = `
       <div class="container">

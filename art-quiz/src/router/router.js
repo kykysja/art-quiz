@@ -18,12 +18,12 @@ const Router = {
     const url = window.location.hash.slice(1) || '/';
 
     switch (true) {
-      case /score/.test(url):
-        if (/artists/.test(url)) {
-          new this.views.ScoreView('artists', State.artists[url.split('/')[2] - 1]).render();
-        } else if (/pictures/.test(url)) {
-          new this.views.ScoreView('pictures', State.pictures[url.split('/')[2] - 1]).render();
-        }
+      case /artists\/quiz\/[0-9]+\/score/.test(url):
+        new this.views.ScoreView('artists', State.artists[url.split('/')[2] - 1]).render();
+        break;
+
+      case /pictures\/quiz\/[0-9]+\/score/.test(url):
+        new this.views.ScoreView('pictures', State.pictures[url.split('/')[2] - 1]).render();
         break;
 
       case /artists\/quiz/.test(url):
@@ -51,7 +51,6 @@ const Router = {
         break;
 
       default:
-      //! to create 404 page!
     }
   },
 };

@@ -2,10 +2,11 @@ import BaseComponent from '../../components/base-component';
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
 import BtnLink from '../../components/button-link/button-link';
+import { DIV } from '../../consts/tags';
 
 class MainScreen extends BaseComponent {
   constructor() {
-    super('div', ['view', 'main-screen__view']);
+    super(DIV, ['view', 'main-screen__view']);
 
     sessionStorage.setItem('art-quiz-app-last-hash', '#');
 

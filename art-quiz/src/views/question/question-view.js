@@ -7,10 +7,14 @@ import playAudio from '../../shared/audio/audio';
 import Img from '../../components/img/img';
 import { generateImageURL, getRandomNum, shuffle } from '../../helpers/helpers';
 import { renderPopUp } from '../../shared/pop-up/pop-up';
+import { DIV } from '../../consts/tags';
+import { NUMBER_OF_TOTAL_DATA_ITEMS } from '../../consts/base';
+
+const AFTER_ANSWER_POP_UP_SHOWING_DELAY = 600;
 
 class QuestionView extends BaseComponent {
   constructor(categoryName, quizNum, question, questionIndex) {
-    super('div', ['question-view', `${categoryName}__question-view`]);
+    super(DIV, ['question-view', `${categoryName}__question-view`]);
 
     this.categoryName = categoryName;
     this.quizNum = quizNum;
@@ -18,7 +22,7 @@ class QuestionView extends BaseComponent {
     this.questionIndex = questionIndex;
     this.answers = this.generateAnswers();
 
-    this.timerOutput = new BaseComponent('div', ['timer-output']);
+    this.timerOutput = new BaseComponent(DIV, ['timer-output']);
     this.timerOutput.element.innerHTML = '-';
 
     this.element.innerHTML =
@@ -87,7 +91,7 @@ class QuestionView extends BaseComponent {
     answersSet.add(this.categoryName === 'artists' ? this.question.author : this.question.imageNum);
 
     while (answersSet.size < 4) {
-      const randomNum = getRandomNum(0, 239);
+      const randomNum = getRandomNum(0, NUMBER_OF_TOTAL_DATA_ITEMS - 1);
 
       if (this.categoryName === 'artists') {
         answersSet.add(State.authors[randomNum]);
@@ -111,7 +115,7 @@ class QuestionView extends BaseComponent {
       renderPopUp(
         new AfterAnswerPopUp(this.categoryName, this.quizNum, this.question, `${result}`)
       );
-    }, 600);
+    }, AFTER_ANSWER_POP_UP_SHOWING_DELAY);
   }
 
   handleAnswerBtnClick(answer) {

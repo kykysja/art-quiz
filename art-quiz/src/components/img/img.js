@@ -1,8 +1,9 @@
+import { IMG } from '../../consts/tags';
 import BaseComponent from '../base-component';
 
 class Img extends BaseComponent {
   constructor(url, alt) {
-    super('img', ['img']);
+    super(IMG, ['img']);
 
     this.element.setAttribute('alt', alt);
 

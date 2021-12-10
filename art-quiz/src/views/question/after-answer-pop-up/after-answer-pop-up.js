@@ -6,10 +6,12 @@ import EndQuizPopUp from '../../quiz/end-quiz-pop-up/end-quiz-pop-up';
 import Btn from '../../../components/button/button';
 import playAudio from '../../../shared/audio/audio';
 import { closePopUp, renderPopUp } from '../../../shared/pop-up/pop-up';
+import { DIV } from '../../../consts/tags';
+import { NUMBER_OF_CORRECT_ANSWERS_TO_PASSED_QUIZ } from '../../../consts/base';
 
 class AfterAnswerPopUp extends BaseComponent {
   constructor(categoryName, quizNum, question, result) {
-    super('div', ['overlay']);
+    super(DIV, ['overlay']);
 
     this.categoryName = categoryName;
     this.quizNum = quizNum;
@@ -19,7 +21,7 @@ class AfterAnswerPopUp extends BaseComponent {
 
     this.pictureInfo = new PictureInfo(this.question);
     this.nextQuestionBtn = new Btn(['btn', '_colored'], 'Продолжить');
-    this.answerResultIndicator = new BaseComponent('div', [
+    this.answerResultIndicator = new BaseComponent(DIV, [
       'answer-icon',
       `${this.result}__answer-icon`,
     ]);
@@ -49,7 +51,7 @@ class AfterAnswerPopUp extends BaseComponent {
       const numberOfCorrectAnswers = this.getNumberOfCorrectAnswers();
 
       playAudio(
-        numberOfCorrectAnswers < 5
+        numberOfCorrectAnswers < NUMBER_OF_CORRECT_ANSWERS_TO_PASSED_QUIZ
           ? '../../../assets/audio/failure.mp3'
           : '../../../assets/audio/success.mp3'
       );

@@ -3,10 +3,11 @@ import BaseComponent from '../../../components/base-component';
 import PictureInfoPopUp from '../picture-info-pop-up/picture-info-pop-up';
 import Img from '../../../components/img/img';
 import { renderPopUp } from '../../../shared/pop-up/pop-up';
+import { BUTTON } from '../../../consts/tags';
 
 class QuestionCard extends BaseComponent {
   constructor(question) {
-    super('button', ['card-item', 'question-card', 'img-btn']);
+    super(BUTTON, ['card-item', 'question-card', 'img-btn']);
 
     this.element.setAttribute('type', 'button');
 

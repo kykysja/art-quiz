@@ -3,10 +3,11 @@ import State from '../../../state/state';
 import Img from '../../../components/img/img';
 import BtnLink from '../../../components/button-link/button-link';
 import { generateImageURL } from '../../../helpers/helpers';
+import { DIV } from '../../../consts/tags';
 
 class QiuzCard extends BaseComponent {
   constructor(categoryName, quiz) {
-    super('div', ['quiz-card', 'card-item']);
+    super(DIV, ['quiz-card', 'card-item']);
 
     this.categoryName = categoryName;
     this.quiz = quiz;

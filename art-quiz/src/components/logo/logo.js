@@ -1,8 +1,9 @@
+import { LINK } from '../../consts/tags';
 import BaseComponent from '../base-component';
 
 class Logo extends BaseComponent {
   constructor() {
-    super('a', ['logo']);
+    super(LINK, ['logo']);
 
     this.element.setAttribute('href', '#');
 

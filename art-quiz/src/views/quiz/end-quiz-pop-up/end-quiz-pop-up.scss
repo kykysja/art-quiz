@@ -38,21 +38,21 @@
     @include font(16px, 16px, 500, -0.91px);
   }
 
-  .quiz-failed__pop-up {
+  .failed__pop-up {
     .result-image {
       background-image: url('./assets/svg/quiz-failed.svg');
     }
 
-    .text_1 {
+    .end-quiz-text {
       @include font(36px, 36px, 700, -0.5px);
     }
 
-    .text_2 {
+    .result-message {
       @include font(22px, 22px, 500, -0.5px);
     }
   }
 
-  .grand-result__pop-up {
+  .grand__pop-up {
     .result-image {
       width: 277px;
       height: 107px;
@@ -60,26 +60,26 @@
       background-image: url('./assets/svg/grand-result.svg');
     }
 
-    .text_1 {
+    .end-quiz-text {
       max-width: 220px;
       @include font(48px, 48px, 700, -0.5px);
     }
 
-    .text_2 {
+    .result-message {
       @include font(22px, 22px, 500, -0.5px);
     }
   }
 
-  .quiz-passed__pop-up {
+  .passed__pop-up {
     .result-image {
       background-image: url('./assets/svg/quiz-passed.svg');
     }
 
-    .text_1 {
+    .end-quiz-text {
       @include font(22px, 22px, 500, -0.5px);
     }
 
-    .text_2 {
+    .result-message {
       @include font(48px, 48px, 700, -0.5px);
     }
   }

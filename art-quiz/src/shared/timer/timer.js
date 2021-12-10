@@ -1,3 +1,4 @@
+const TIMER_STEP = 1000;
 class Timer {
   onRunning() {
     if (this.remainingTime < 1) {
@@ -15,7 +16,7 @@ class Timer {
     this.remainingTime = duration;
     this.currentQuestion = currentQuestion;
 
-    this.interval = setInterval(() => this.onRunning(), 1000);
+    this.interval = setInterval(() => this.onRunning(), TIMER_STEP);
   }
 
   stop() {

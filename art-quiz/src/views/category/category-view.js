@@ -5,10 +5,11 @@ import Header from '../../components/header/header';
 import Logo from '../../components/logo/logo';
 import QuizCard from './quiz-card/quiz-card';
 import State from '../../state/state';
+import { DIV } from '../../consts/tags';
 
 class CategoryView extends BaseComponent {
   constructor(categoryName) {
-    super('div', ['view', 'category__view']);
+    super(DIV, ['view', 'category__view']);
 
     sessionStorage.setItem('art-quiz-app-last-hash', window.location.hash);
 
@@ -17,7 +18,7 @@ class CategoryView extends BaseComponent {
     this.header = new Header();
     this.settingsBtn = new BtnLink('#settings', ['icon-btn', 'settings-btn']);
     this.logo = new Logo();
-    this.quizzesCardsContainer = new BaseComponent('div', ['cards-container']);
+    this.quizzesCardsContainer = new BaseComponent(DIV, ['cards-container']);
     this.footer = new Footer();
 
     this.element.innerHTML = `

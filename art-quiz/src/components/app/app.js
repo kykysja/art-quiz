@@ -1,10 +1,11 @@
 import Router from '../../router/router';
 import State from '../../state/state';
 import { setToLocalStorage } from '../../shared/local-storage/local-storage';
+import { DIV } from '../../consts/tags';
 
 class App {
   constructor() {
-    this.rootElement = document.createElement('div');
+    this.rootElement = document.createElement(DIV);
     this.rootElement.id = 'root';
   }
 

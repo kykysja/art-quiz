@@ -1,32 +1,37 @@
 import State from '../../../state/state';
 import BaseComponent from '../../../components/base-component';
 import BtnLink from '../../../components/button-link/button-link';
+import { DIV } from '../../../consts/tags';
+import {
+  NUMBER_OF_CORRECT_ANSWERS_TO_PASSED_QUIZ,
+  NUMBER_OF_QUIZ_QUESTIONS,
+} from '../../../consts/base';
 
 class EndQuizPopUp extends BaseComponent {
   constructor(categoryName, quizNum, numberOfCorrectAnswers) {
-    super('div', ['overlay']);
+    super(DIV, ['overlay']);
 
     this.categoryName = categoryName;
     this.quizNum = quizNum;
     this.numberOFQuizzes =
       this.categoryName === 'artists' ? State.artists.length : State.pictures.length;
 
-    if (numberOfCorrectAnswers < 5) {
-      this.result = 'quiz-failed';
-      this.resultText_1 = 'Конец игры';
-      this.resultText_2 = 'Сыграть еще раз?';
+    if (numberOfCorrectAnswers < NUMBER_OF_CORRECT_ANSWERS_TO_PASSED_QUIZ) {
+      this.result = 'failed';
+      this.endQuizText = 'Конец игры';
+      this.resultText = 'Сыграть еще раз?';
       this.playBtnText = 'Играть';
       this.playBtnHref = `#${this.categoryName}/quiz/${this.quizNum}`;
-    } else if (numberOfCorrectAnswers === 10) {
-      this.result = 'grand-result';
-      this.resultText_1 = 'Лучший результат';
-      this.resultText_2 = 'Поздравляем!';
+    } else if (numberOfCorrectAnswers === NUMBER_OF_QUIZ_QUESTIONS) {
+      this.result = 'grand';
+      this.endQuizText = 'Лучший результат';
+      this.resultText = 'Поздравляем!';
       this.playBtnText = 'Следующий раунд';
       this.playBtnHref = `#${this.categoryName}/quiz/${this.quizNum + 1}`;
     } else {
-      this.result = 'quiz-passed';
-      this.resultText_1 = 'Поздравляем!';
-      this.resultText_2 = `${numberOfCorrectAnswers}/10`;
+      this.result = 'passed';
+      this.endQuizText = 'Поздравляем!';
+      this.resultText = `${numberOfCorrectAnswers}/10`;
       this.playBtnText = 'Следующий раунд';
       this.playBtnHref = `#${this.categoryName}/quiz/${this.quizNum + 1}`;
     }
@@ -44,8 +49,8 @@ class EndQuizPopUp extends BaseComponent {
         <div class="pop-up-wrap ${this.result}__pop-up">
           <div class="result-image"></div>
           <div class="result-text">
-            <span class="text_1">${this.resultText_1}</span>
-            <span class="text_2">${this.resultText_2}</span>
+            <span class="end-quiz-text">${this.endQuizText}</span>
+            <span class="result-message">${this.resultText}</span>
           </div>
           <div class="buttons-container"></div>
         </div>
@@ -61,9 +66,7 @@ class EndQuizPopUp extends BaseComponent {
       this.element.querySelector('.buttons-container').classList.add('centered');
     }
 
-    // ? how to do more correctly ?
-
-    if (numberOfCorrectAnswers < 5)
+    if (numberOfCorrectAnswers < NUMBER_OF_CORRECT_ANSWERS_TO_PASSED_QUIZ)
       this.playBtn.element.addEventListener('click', () => {
         window.location.hash = `${this.categoryName}`;
         window.location.hash = `${this.playBtnHref}`;

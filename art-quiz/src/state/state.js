@@ -1,4 +1,10 @@
 import getData from '../api/data';
+import {
+  DEFAULT_AUDIO_VOLUME_IN_PERCENTS,
+  DEFAULT_TIME_TO_ANSWER,
+  NUMBER_OF_ONE_CATEGORY_QUESTIONS,
+  NUMBER_OF_QUIZ_QUESTIONS,
+} from '../consts/base';
 import { getFromLocalStorage } from '../shared/local-storage/local-storage';
 
 const State = {
@@ -11,8 +17,8 @@ const State = {
   async setCategoryQuizzes(categoryName) {
     const data = await getData(`${categoryName}`);
 
-    for (let i = 0; i < data.length; i += 10) {
-      const quizNum = i / 10 + 1;
+    for (let i = 0; i < data.length; i += NUMBER_OF_QUIZ_QUESTIONS) {
+      const quizNum = i / NUMBER_OF_QUIZ_QUESTIONS + 1;
 
       if (categoryName === 'artists')
         this.artists.push({
@@ -25,11 +31,11 @@ const State = {
         this.pictures.push({
           quizNum,
           isPlayed: false,
-          imageNum: i + 120,
+          imageNum: i + NUMBER_OF_ONE_CATEGORY_QUESTIONS,
           questions: [],
         });
 
-      for (let q = i; q < i + 10; q += 1) {
+      for (let q = i; q < i + NUMBER_OF_QUIZ_QUESTIONS; q += 1) {
         if (categoryName === 'artists')
           this.artists[quizNum - 1].questions.push({ ...data[q], isCorrectAnswered: false });
         else if (categoryName === 'pictures')
@@ -56,8 +62,8 @@ const State = {
 
   setSettings() {
     this.settings.timeGame = false;
-    this.settings.timeToAnswer = 20;
-    this.settings.audioVolume = 0.5;
+    this.settings.timeToAnswer = DEFAULT_TIME_TO_ANSWER;
+    this.settings.audioVolume = DEFAULT_AUDIO_VOLUME_IN_PERCENTS / 100;
   },
 
   async setState() {

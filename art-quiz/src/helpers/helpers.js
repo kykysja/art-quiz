@@ -10,5 +10,7 @@ export function shuffle(arr) {
 }
 
 export function generateImageURL(imageNum) {
-  return `https://raw.githubusercontent.com/kykysja/art-quiz-data/master/img/${imageNum}.jpg`;
+  const baseUrl = 'https://raw.githubusercontent.com/kykysja/art-quiz-data/master/img/';
+
+  return `${baseUrl}${imageNum}.jpg`;
 }

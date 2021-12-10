@@ -3,11 +3,12 @@ import BtnLink from '../../components/button-link/button-link';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import Logo from '../../components/logo/logo';
+import { DIV } from '../../consts/tags';
 import QuestionCard from './question-card/question-card';
 
 class ScoreView extends BaseComponent {
   constructor(categoryName, quiz) {
-    super('div', ['view', 'score__view']);
+    super(DIV, ['view', 'score__view']);
 
     sessionStorage.setItem('art-quiz-app-last-hash', window.location.hash);
 
@@ -17,7 +18,7 @@ class ScoreView extends BaseComponent {
     this.header = new Header();
     this.settingsBtn = new BtnLink('#settings', ['icon-btn', 'settings-btn']);
     this.logo = new Logo();
-    this.questionsCardsContainer = new BaseComponent('div', ['cards-container']);
+    this.questionsCardsContainer = new BaseComponent(DIV, ['cards-container']);
     this.footer = new Footer();
 
     this.element.innerHTML = `

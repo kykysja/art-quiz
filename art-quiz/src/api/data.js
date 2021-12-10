@@ -1,7 +1,7 @@
 async function getData(dataName) {
-  const res = await fetch(
-    `https://raw.githubusercontent.com/kykysja/art-quiz-data/master/${dataName}.json`
-  );
+  const baseUrl = 'https://raw.githubusercontent.com/kykysja/art-quiz-data/master/';
+
+  const res = await fetch(`${baseUrl}${dataName}.json`);
 
   const data = await res.json();
 

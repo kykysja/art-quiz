@@ -2,10 +2,11 @@ import BaseComponent from '../../../components/base-component';
 import Btn from '../../../components/button/button';
 import BtnLink from '../../../components/button-link/button-link';
 import { closePopUp } from '../../../shared/pop-up/pop-up';
+import { DIV } from '../../../consts/tags';
 
 class InterruptQuizPopUp extends BaseComponent {
   constructor(categoryName) {
-    super('div', ['overlay']);
+    super(DIV, ['overlay']);
 
     this.categoryName = categoryName;
 

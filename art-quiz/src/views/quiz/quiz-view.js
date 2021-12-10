@@ -6,10 +6,11 @@ import { renderPopUp } from '../../shared/pop-up/pop-up';
 import State from '../../state/state';
 import QuestionView from '../question/question-view';
 import InterruptQuizPopUp from './interrupt-quiz-pop-up/interrupt-quiz-pop-up';
+import { DIV } from '../../consts/tags';
 
 class QuizView extends BaseComponent {
   constructor(categoryName, quiz) {
-    super('div', ['view', 'quiz__view']);
+    super(DIV, ['view', 'quiz__view']);
 
     this.categoryName = categoryName;
     this.quiz = quiz;

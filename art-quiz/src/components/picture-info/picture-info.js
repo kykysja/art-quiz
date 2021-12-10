@@ -1,10 +1,11 @@
+import { DIV } from '../../consts/tags';
 import { generateImageURL } from '../../helpers/helpers';
 import BaseComponent from '../base-component';
 import Img from '../img/img';
 
 class PictureInfo extends BaseComponent {
   constructor(question) {
-    super('div', ['picture-info']);
+    super(DIV, ['picture-info']);
 
     this.question = question;
     this.imgUrl = generateImageURL(this.question.imageNum);

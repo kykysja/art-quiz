@@ -1,14 +1,15 @@
 import BaseComponent from '../../../components/base-component';
 import Img from '../../../components/img/img';
+import { BUTTON } from '../../../consts/tags';
 import { generateImageURL } from '../../../helpers/helpers';
 
 class QuestionAnswerBtn extends BaseComponent {
   constructor(categoryName, answer) {
     const classes = categoryName === 'artists' ? ['btn', '_light'] : ['img-btn'];
 
-    super('button', ['question__answer-btn', ...classes]);
+    super(BUTTON, ['question__answer-btn', ...classes]);
 
-    this.element.setAttribute('type', 'button');
+    this.element.setAttribute('type', BUTTON);
 
     this.categoryName = categoryName;
     this.answerData = answer;

@@ -2,7 +2,9 @@ class BaseComponent {
   constructor(tag, classes) {
     this.element = document.createElement(tag);
 
-    if (classes) this.element.classList.add(...classes);
+    if (classes) {
+      this.element.classList.add(...classes);
+    }
   }
 
   appendInto(parentElem) {
